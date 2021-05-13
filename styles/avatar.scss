@@ -1,0 +1,14 @@
+@import 'vars';
+
+.Avatar {
+  display: inline-block;
+  width: $unit * 24px;
+  height: $unit * 24px;
+  border-radius: $unit * 6px;
+  overflow: hidden;
+
+  &.is-bigger {
+    width: $unit * 32px;
+    height: $unit * 32px;
+  }
+}

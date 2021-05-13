@@ -1,0 +1,35 @@
+@import 'vars';
+@import 'mixins';
+
+// Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap');
+
+// Application typography
+@each $key, $value in $fontSizes {
+  .as-font--#{$key} {
+    @include font(500, $key, text);
+  }
+  .as-font--#{$key}-light {
+    @include font(400, $key, text);
+  }
+  .as-font--#{$key}-semi {
+    @include font(600, $key, text);
+  }
+  .as-font--#{$key}-bold {
+    @include font(800, $key, text);
+  }
+}
+
+.no-spacing-3 {
+  letter-spacing: -2.5px;
+}
+.no-spacing-1 {
+  letter-spacing: -0.5px;
+}
+
+.has-spacing {
+  letter-spacing: 1px;
+}
+.is-center {
+  text-align: center;
+}
