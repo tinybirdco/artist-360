@@ -1,9 +1,11 @@
 import Head from "next/head";
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-import SimpleList from "../../components/SimpleList";
+const SimpleList = dynamic(() => import("../../components/SimpleList"), {
+  ssr: false,
+});
 
 const INTERVAL_REFRESH = 3000;
 
@@ -35,14 +37,14 @@ export default function Artist() {
             <span>analytics</span>
             <br />
             <span className="Avatar as-bkg--tuna mr-6"></span>
-            <span>{name}</span>
+            <span style={{ textTransform: "capitalize" }}>{name}</span>
           </h1>
         </div>
 
-        <div className="Content-twoSecond"></div>
+        <div style={{ gridColumn: "4/6" }}></div>
 
-        <div className="Content-full">
-          <hr />
+        <div style={{ gridColumn: "1/6" }}>
+          <hr style={{ border: "0", borderTop: "1px solid #F2F2F2" }} />
         </div>
 
         <div className="Content-threeFirst">paco</div>
@@ -60,6 +62,7 @@ export default function Artist() {
           filters={{
             country,
             service,
+            artist: name,
           }}
           label={"Streams"}
         />
@@ -71,6 +74,7 @@ export default function Artist() {
           filters={{
             country,
             service,
+            artist: name,
           }}
           label={"Streams"}
         />

@@ -1,9 +1,9 @@
-export default Loader = ({
+export default function Loader({
   className = "",
   size = 11,
-  strokeColor = "#25283D",
+  strokeColor = "#000",
   strokeWidth = 1,
-}) => {
+}) {
   return (
     <div
       className={`Loader ${className}`}
@@ -35,4 +35,4 @@ export default Loader = ({
       ></div>
     </div>
   );
-};
+}

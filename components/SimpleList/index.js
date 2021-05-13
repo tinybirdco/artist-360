@@ -5,6 +5,7 @@ import Info from "./Info";
 import Figure from "./Figure";
 import Graph from "./Graph";
 import LoadingItem from "./LoadingItem";
+import Loader from "../Loader";
 import useRequestChainInterval from "../../utils/use-request-chain-interval";
 
 export default function SimpleList({
@@ -39,16 +40,16 @@ export default function SimpleList({
     setLoading(false);
   }
 
-  // useRequestChainInterval(_fetchData, localInterval);
+  useRequestChainInterval(_fetchData, localInterval);
 
-  // useVisibilityChange({
-  //   onShow: () => {
-  //     setLocalInterval(interval);
-  //   },
-  //   onHide: () => {
-  //     setLocalInterval(null);
-  //   },
-  // });
+  useVisibilityChange({
+    onShow: () => {
+      setLocalInterval(interval);
+    },
+    onHide: () => {
+      setLocalInterval(null);
+    },
+  });
 
   useEffect(() => {
     setLocalInterval(interval);
@@ -65,8 +66,11 @@ export default function SimpleList({
 
   return (
     <div className="Card" style={{ gridColumn: size }}>
-      <label className="as-font--caption as-color--tuna-100">LISTS</label>
-      <h3 className="as-font--medium as-color--main mt-2">{title}</h3>
+      <label className="as-font--caption as-color--tuna-200">LISTS</label>
+      <h3 className="flex as-font--medium as-color--main mt-2">
+        <span>{title}</span>
+        {loading && <Loader className="ml-4" />}
+      </h3>
 
       <ul className="mt-12">
         {(loading && !data.length) || (error && !data.length) ? (
