@@ -14,6 +14,7 @@ export default function SimpleList({
   showGraph = false,
   endpoint,
   interval,
+  filters,
 }) {
   const [localInterval, setLocalInterval] = useState(interval);
   const [loading, setLoading] = useState(true);
@@ -61,7 +62,7 @@ export default function SimpleList({
         _fetchData();
       }
     },
-    [localInterval]
+    [localInterval, filters]
   );
 
   return (

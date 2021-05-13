@@ -1,0 +1,24 @@
+@import 'vars';
+
+.ServiceFilter {
+  display: flex;
+}
+.ServiceFilter-button {
+  padding: $unit * 3.5px $unit * 13px;
+  border-radius: $unit * 14px;
+  color: var(--main-color);
+  border: 1px solid var(--tuna-color);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--main-color);
+    color: #FFF;
+    border-color: var(--main-color);
+  }
+}
+.ServiceFilter-buttonSelected {
+  background: var(--main-color);
+  color: #FFF;
+  border-color: var(--main-color);
+  cursor: auto;
+}

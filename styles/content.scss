@@ -4,9 +4,11 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: $unit * 16px;
-  width: $unit * 564px;
+  max-width: $unit * 564px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 $unit * 10px;
+  box-sizing: border-box;
 }
 .Content-threeFirst {
   grid-column: 1/4;

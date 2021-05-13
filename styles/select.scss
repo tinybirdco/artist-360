@@ -1,0 +1,39 @@
+@import 'mixins';
+
+.CustomSelect__single-value,
+.CustomSelect__placeholder {
+  position: static;
+  top: auto;
+  left: auto;
+  transform: none;
+  max-width: none;
+}
+
+.CustomSelect__value-container {
+  padding: $unit * 4px $unit * 8px;
+}
+.CustomSelect__placeholder,
+.CustomSelect__single-value {
+  @include font(500, small, text);
+  font-size: 14px!important;
+}
+.CustomSelect__option,
+.CustomSelect__input {
+  @include font(400, small, text);
+  font-size: 14px!important;
+}
+.CustomSelect__control--menu-is-open {
+  box-shadow: none!important;
+  border-color: #000!important;
+}
+.CustomSelect__option--is-focused {
+  background: var(--tuna-color)!important;
+}
+.CustomSelect__option--is-selected {
+  background: var(--main-color)!important;
+}
+.CustomSelect__value-container > div {
+  width: auto !important;
+}
+.CustomSelect__indicator-separator,
+.CustomSelect__indicator { display: none!important; }
