@@ -18,7 +18,8 @@
   font-size: 14px!important;
 }
 .CustomSelect__option,
-.CustomSelect__input {
+.CustomSelect__input,
+.CustomSelect__menu {
   @include font(400, small, text);
   font-size: 14px!important;
 }
