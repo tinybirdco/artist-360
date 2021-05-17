@@ -36,6 +36,10 @@ button {
   line-height: normal;
 }
 
+a {
+  text-decoration: underline
+}
+
 @import 'utils';
 @import 'typography';
 @import 'colors';
