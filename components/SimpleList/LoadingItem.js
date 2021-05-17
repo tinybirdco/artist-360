@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "../../styles/Loading.module.scss";
 
-export default function LoadingItem() {
+export default function LoadingItem({}) {
   const [titleWidth] = useState(_random(60, 150));
   const [descWidth] = useState(_random(40, 120));
   const [figureWidth] = useState(_random(30, 100));

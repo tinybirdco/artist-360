@@ -11,6 +11,14 @@ const SimpleList = dynamic(() => import("../../components/SimpleList"), {
   ssr: false,
 });
 
+const Performance = dynamic(() => import("../../components/Performance"), {
+  ssr: false,
+});
+
+const Plays = dynamic(() => import("../../components/Plays"), {
+  ssr: false,
+});
+
 const INTERVAL_REFRESH = 3000;
 
 export default function Artist() {
@@ -64,8 +72,29 @@ export default function Artist() {
           />
         </div>
 
-        {/* <div className="Card Content-threeFirst"></div>
-        <div className="Card Content-twoSecond"></div> */}
+        <Plays
+          size={"1/4"}
+          endpoint={{
+            rt: "evolution_plays_income_per_second",
+            fixed: "evolution_plays_income",
+          }}
+          filters={{
+            country,
+            source: service,
+            artist: name,
+          }}
+        />
+
+        <Performance
+          interval={INTERVAL_REFRESH}
+          size={"4/6"}
+          endpoint={"whatever"}
+          filters={{
+            country,
+            source: service,
+            artist: name,
+          }}
+        />
 
         <SimpleList
           interval={INTERVAL_REFRESH}
@@ -74,7 +103,7 @@ export default function Artist() {
           endpoint={"whatever"}
           filters={{
             country,
-            service,
+            source: service,
             artist: name,
           }}
           label={"Streams"}

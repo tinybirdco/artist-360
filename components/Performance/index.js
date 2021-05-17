@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import useVisibilityChange from "use-visibility-change";
 
-import Info from "./Info";
-import Figure from "./Figure";
-import Graph from "../SimpleGraph";
-import LoadingItem from "./LoadingItem";
-import Loader from "../Loader";
+// import Info from "./Info";
+// import Figure from "./Figure";
+import SimpleGraph from "../SimpleGraph";
+// import LoadingItem from "./LoadingItem";
 import useRequestChainInterval from "../../utils/use-request-chain-interval";
+import Loader from "../Loader";
 
-export default function SimpleList({
+export default function Performance({
   size,
   title,
   showGraph = false,
@@ -18,7 +18,7 @@ export default function SimpleList({
 }) {
   const [localInterval, setLocalInterval] = useState(interval);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]); // name, desc, figure, graph
+  const [data, setData] = useState([]); // revenue, stats, monthly listeners and followers
   const [error, setError] = useState(false);
 
   async function _fetchData() {
@@ -67,13 +67,53 @@ export default function SimpleList({
 
   return (
     <div className="Card" style={{ gridColumn: size }}>
-      <label className="as-font--caption as-color--tuna-200">LISTS</label>
+      <label className="flex as-font--caption as-color--tuna-200">
+        <span>PERFORMANCE</span>
+      </label>
       <h3 className="flex as-font--medium as-color--main mt-2">
-        <span>{title}</span>
+        <span>Last Month</span>
         {loading && <Loader className="ml-4" />}
       </h3>
 
-      <ul className="mt-12">
+      <SimpleGraph
+        data={[
+          100, 234, 23, 234, 2, 324, 234, 100, 234, 23, 234, 2, 324, 234, 559,
+          234, 23, 124, 734, 789,
+        ]}
+      />
+
+      <div className="mt-10">
+        <h3 className="as-font--huge-bold as-color--main no-spacing-3">
+          123,552€
+        </h3>
+        <label className="as-font--small-light">
+          <span className="as-color--main">Revenue</span>
+          <span className="as-color--tuna-200 ml-4">Current</span>
+        </label>
+      </div>
+
+      <hr
+        className="mt-16 mb-10"
+        style={{ border: "0", borderTop: "1px solid rgba(0,0,0,0.05)" }}
+      />
+
+      <ul>
+        <li className="flex-between-center">
+          <div>
+            <h4 className="as-font--medium-light as-color--main">
+              Monthy listeners
+            </h4>
+            <label className="as-font--small-light as-color--tuna-200">
+              Current
+            </label>
+          </div>
+          <h5 className="as-font--title-bold as-color--main no-spacing-1">
+            54,5M
+          </h5>
+        </li>
+      </ul>
+
+      {/* <ul className="mt-12">
         {(loading && !data.length) || (error && !data.length) ? (
           <>
             <LoadingItem />
@@ -91,20 +131,7 @@ export default function SimpleList({
             </li>
           </>
         )}
-      </ul>
-
-      <button className="flex as-font--medium as-color--main mt-12">
-        <span className="no-spacing-1">View all</span>
-        <svg
-          className="ml-3"
-          width="12"
-          height="12"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path opacity=".2" d="M.5 11.5l11-11m0 0v11m0-11H.5" stroke="#000" />
-        </svg>
-      </button>
+      </ul> */}
     </div>
   );
 }

@@ -13,9 +13,10 @@ export default function CountryDropdown({ value, onChange }) {
         defaultValue={value}
         options={options}
         isSearchable={true}
-        isClearable={false}
+        isClearable={true}
         placeholder={"🌎 World"}
         classNamePrefix={"CustomSelect"}
+        onChange={(res) => onChange(res ? res.value : null)}
       />
     </div>
   );

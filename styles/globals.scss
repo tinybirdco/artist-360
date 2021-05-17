@@ -34,6 +34,14 @@ button {
   background: none;
   border: none;
   line-height: normal;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed
+  }
 }
 
 a {
