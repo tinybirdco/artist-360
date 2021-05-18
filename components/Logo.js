@@ -9,8 +9,8 @@ export default function Logo() {
           title="Galeo"
           alt="Galeo"
         />
-        <span>for artists</span>
       </a>
+      <span>for artists</span>
       <sup className="as-font--label ml-3">
         by{" "}
         <a href="https://tinybird.co" className="as-color--main">

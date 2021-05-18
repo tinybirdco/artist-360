@@ -73,37 +73,12 @@ export default function Artist() {
             <Link href="/">
               <a className="as-color--main">Real-time</a>
             </Link>
-            <svg
+            <img
               className="mr-6 ml-6"
-              width="48"
-              height="48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="48" height="48" rx="12" fill="url(#paint0_linear)" />
-              <path
-                opacity=".6"
-                d="M38 12.398L29.259 10l-3.076 6.873L38 12.397zM29.78 29.27l-7.966-3.234L16.936 38l12.844-8.73z"
-                fill="#fff"
-              />
-              <path
-                d="M10 22.316l19.641 7.03 3.221-15.019L10 22.316z"
-                fill="#fff"
-              />
-              <defs>
-                <linearGradient
-                  id="paint0_linear"
-                  x1="49.737"
-                  y1="0"
-                  x2="-8.794"
-                  y2="-.393"
-                  gradientUnits="userSpaceOnUse"
-                >
-                  <stop stopColor="#22CD88" />
-                  <stop offset=".982" stopColor="#04BAF5" />
-                </linearGradient>
-              </defs>
-            </svg>
+              src="/tinybird.svg"
+              alt="Tinybird"
+              title="Tinybird"
+            />
             <span>analytics:</span>
             <br />
             {avatar ? (
