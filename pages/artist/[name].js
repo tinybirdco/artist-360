@@ -108,19 +108,31 @@ export default function Artist() {
           <ServiceFilter
             value={service}
             onChange={(s) =>
-              router.push({
-                pathname: "/artist/[name]",
-                query: { name, service: s, country },
-              })
+              router.push(
+                {
+                  pathname: "/artist/[name]",
+                  query: { name, service: s, country },
+                },
+                null,
+                {
+                  scroll: false,
+                }
+              )
             }
           />
           <CountryDropdown
             country={country}
             onChange={(c) =>
-              router.push({
-                pathname: "/artist/[name]",
-                query: { name, service, country: c },
-              })
+              router.push(
+                {
+                  pathname: "/artist/[name]",
+                  query: { name, service, country: c },
+                },
+                null,
+                {
+                  scroll: false,
+                }
+              )
             }
           />
         </div>
