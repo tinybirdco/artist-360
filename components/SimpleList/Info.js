@@ -1,6 +1,6 @@
-export default function Info({ title, desc, img }) {
+export default function Info({ title, desc, img, maxWidth }) {
   return (
-    <div className="flex">
+    <div className="flex" style={{ maxWidth }}>
       <div className="Avatar is-bigger as-bkg--tuna-100 mr-8">
         <img src={img} alt={title} title={title} />
       </div>
