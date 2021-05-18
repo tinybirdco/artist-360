@@ -29,3 +29,4 @@ All API endpoints used in this demo are available in this [page](https://api.tin
 - [ ] Countries home block
 - [ ] Responsive
 - [ ] Graph issues
+- [ ] Favicon
