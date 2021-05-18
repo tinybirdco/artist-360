@@ -1,0 +1,734 @@
+[
+  {
+  "artist": "24kgoldn",
+  "song_id": "3IGDjnVf4i7g44bePMSKV0"
+  },
+  {
+  "artist": "a7s",
+  "song_id": "6SzbkrY8OH3fHlLwdni592"
+  },
+  {
+  "artist": "abra",
+  "song_id": "0qeGCfzkQfpt2JlHqxamOG"
+  },
+  {
+  "artist": "aitana",
+  "song_id": "49jhcLhfG1EtNpeVpso7NE"
+  },
+  {
+  "artist": "alejandro sanz",
+  "song_id": "0wQsxxcUB2XoKRj2zohHxv"
+  },
+  {
+  "artist": "alico",
+  "song_id": "3lCbsHaN1wCxyDzcNN2x4N"
+  },
+  {
+  "artist": "alizzz",
+  "song_id": "2kfxOgqXVZC4zySV2R7AJ3"
+  },
+  {
+  "artist": "alvaro de luna",
+  "song_id": "23E53f3C9SJ9MqBh1f6hEw"
+  },
+  {
+  "artist": "alvaro diaz",
+  "song_id": "5pzwOJggPrk2tYMhsuhpfr"
+  },
+  {
+  "artist": "amaia",
+  "song_id": "2vivizJ1BWvBLXbCoFpU4K"
+  },
+  {
+  "artist": "ana mena",
+  "song_id": "0IF838oMOC1gYodhSplvPN"
+  },
+  {
+  "artist": "andy williams",
+  "song_id": "1oj8GzKakCbLyTUokiXhMx"
+  },
+  {
+  "artist": "antonio orozco",
+  "song_id": "1Cqfo5CLF6Z0rrymHJAiX2"
+  },
+  {
+  "artist": "anuel aa",
+  "song_id": "127Q567KlWtlo1pLsiXr3h"
+  },
+  {
+  "artist": "arcangel",
+  "song_id": "2QNkDzoryp1HeyHbSgtRMG"
+  },
+  {
+  "artist": "ariana grande",
+  "song_id": "2aND0aDwz3kKZKQ7nTT2o4"
+  },
+  {
+  "artist": "aya nakamura",
+  "song_id": "0z8fheNkzUmPq77nP4kDFa"
+  },
+  {
+  "artist": "ayax y prok",
+  "song_id": "7mwuIpP5R5pCYkEwKWpaiC"
+  },
+  {
+  "artist": "bad bunny",
+  "song_id": "58q2HKrzhC3ozto2nDdN4z"
+  },
+  {
+  "artist": "bad gyal",
+  "song_id": "2fR098ZvKuJHpS6uKq6AZV"
+  },
+  {
+  "artist": "bandaga",
+  "song_id": "3la3ywDAvhJ6lR7sVE0d6J"
+  },
+  {
+  "artist": "beele",
+  "song_id": "6NXTbpdRwE4c6Qob6X3KhM"
+  },
+  {
+  "artist": "belen aguilera",
+  "song_id": "7pOBWaARASS210FeetnT5y"
+  },
+  {
+  "artist": "belinda",
+  "song_id": "6CVvsvHmDyWrEz5J2zvrsH"
+  },
+  {
+  "artist": "benny blanco",
+  "song_id": "7FGq80cy8juXBCD2nrqdWU"
+  },
+  {
+  "artist": "beny jr",
+  "song_id": "4aOy6x7qVo203dr7K3Ch8r"
+  },
+  {
+  "artist": "beret",
+  "song_id": "7tXHU3EeMfHioXLSCRdDO9"
+  },
+  {
+  "artist": "billie eilish",
+  "song_id": "3yNZ5r3LKfdmjoS3gkhUCT"
+  },
+  {
+  "artist": "bizarrap",
+  "song_id": "7fvC2Vhn5tce1C3T2I6XgN"
+  },
+  {
+  "artist": "black eyed peas",
+  "song_id": "5NyS3oxTlos3Agl2YtZwrC"
+  },
+  {
+  "artist": "bobby helms",
+  "song_id": "7vQbuQcyTflfCIOu3Uzzya"
+  },
+  {
+  "artist": "boza",
+  "song_id": "0t2oeK5A54ZCtMH6NTf7kc"
+  },
+  {
+  "artist": "brenda lee",
+  "song_id": "2yxTGxTDbgcbMN0Ae102bn"
+  },
+  {
+  "artist": "c. tangana",
+  "song_id": "5wNCqj7omYnDl7gE4BzSNS"
+  },
+  {
+  "artist": "cali y el dandee",
+  "song_id": "4uHs0TfECKllxN8zeLWqJu"
+  },
+  {
+  "artist": "camilo",
+  "song_id": "1nocRtwyNPVtGcIJqfgdzZ"
+  },
+  {
+  "artist": "camin",
+  "song_id": "0idWG79wbsuZkqHQKpG02b"
+  },
+  {
+  "artist": "casper magico",
+  "song_id": "7IO0e64fZYskHHOh9B5RGy"
+  },
+  {
+  "artist": "chema rivas",
+  "song_id": "4QPLtCSQh10inI5iwUoG2p"
+  },
+  {
+  "artist": "chencho corleone",
+  "song_id": "1aUGxXCz9QimNkKeiJtzZ7"
+  },
+  {
+  "artist": "conan gray",
+  "song_id": "7hpJ9tATWb2vztlq99hERP"
+  },
+  {
+  "artist": "dababy",
+  "song_id": "0eBOVXdnrVQ0rITgKXBAA7"
+  },
+  {
+  "artist": "daddy yankee",
+  "song_id": "2yTDWOCN0jpezKGhAHG68o"
+  },
+  {
+  "artist": "dani",
+  "song_id": "42sYKO9iXIJK3tsm9jJvLn"
+  },
+  {
+  "artist": "dani fernandez",
+  "song_id": "1FATBmnU4iDkGOv5cw46QH"
+  },
+  {
+  "artist": "danna paola",
+  "song_id": "56bAsWnhSvtLJXkuu2w48l"
+  },
+  {
+  "artist": "danny romero",
+  "song_id": "0Ore9Kuvw3gO5l7QK684Rm"
+  },
+  {
+  "artist": "david bisbal",
+  "song_id": "0AmI2BwaIIh4cOurbv91tp"
+  },
+  {
+  "artist": "david otero",
+  "song_id": "4eoWfbSKXwvNE2iSXrplSZ"
+  },
+  {
+  "artist": "daviles de novelda",
+  "song_id": "0fK6c0UOYs5cIn9zNoqBXQ"
+  },
+  {
+  "artist": "dean martin",
+  "song_id": "0dG69tIjOO6DSltDSINNOJ"
+  },
+  {
+  "artist": "delaossa",
+  "song_id": "6EAba8QwH7CExDpkMwsWU0"
+  },
+  {
+  "artist": "dellafuente",
+  "song_id": "6QnyIKghFRYyomp5ozWosm"
+  },
+  {
+  "artist": "denise rosenthal",
+  "song_id": "4pKtuftWSg5EIuk72ZF4IC"
+  },
+  {
+  "artist": "dj nelson",
+  "song_id": "0m2CS9McLcfM6UNtUBagyn"
+  },
+  {
+  "artist": "doja cat",
+  "song_id": "4QdjPwwCCq3ifWVHiRj3jx"
+  },
+  {
+  "artist": "don patricio",
+  "song_id": "13QKrnEHwzz43EC1sD8LRZ"
+  },
+  {
+  "artist": "dua lipa",
+  "song_id": "6Iog4lmk14dVm97ZAokg17"
+  },
+  {
+  "artist": "duki",
+  "song_id": "1YIqazOPARc41ThBqS7a8F"
+  },
+  {
+  "artist": "dvicio",
+  "song_id": "1r45R9WMrFV0gTeSxFUsU9"
+  },
+  {
+  "artist": "el alfa",
+  "song_id": "6g3nXe5uFs9C4WTxoKS475"
+  },
+  {
+  "artist": "el jhota",
+  "song_id": "1Mr76AftPMhilTmwxLjmt4"
+  },
+  {
+  "artist": "eladio carrion",
+  "song_id": "49rPng8YZ4EeBxRtrS5mZA"
+  },
+  {
+  "artist": "elpatron970",
+  "song_id": "5FI25fEV0GC8z73nFdSec3"
+  },
+  {
+  "artist": "evaluna montaner",
+  "song_id": "7LWo2thKTCQngMPjDjjD1X"
+  },
+  {
+  "artist": "farruko",
+  "song_id": "6myt1VqTdFW9b8ZOwmOwFS"
+  },
+  {
+  "artist": "fito y fitipaldis",
+  "song_id": "3IBYWoQQI0NyhziZSlJ28K"
+  },
+  {
+  "artist": "flow la movie",
+  "song_id": "6XWIomhEsdIVZpYEUC6iT5"
+  },
+  {
+  "artist": "frank sinatra",
+  "song_id": "1NKmuWt1U1RssA8gXgUYqS"
+  },
+  {
+  "artist": "fred de palma",
+  "song_id": "2NuCF6AyI73w6GfMYGhaKA"
+  },
+  {
+  "artist": "funzo & baby loud",
+  "song_id": "6aLbr8SKCsjMHQGfrym1dU"
+  },
+  {
+  "artist": "guaynaa",
+  "song_id": "2YRvdf9cdS88y1wB1WhKoE"
+  },
+  {
+  "artist": "harry styles",
+  "song_id": "1IF5UcqRO42D12vYwceOY6"
+  },
+  {
+  "artist": "hens",
+  "song_id": "5ctynSRV39IRuwohhocNef"
+  },
+  {
+  "artist": "iann dior",
+  "song_id": "3p76CbedbZakoOCHV6wPZE"
+  },
+  {
+  "artist": "india martinez",
+  "song_id": "4BMen2skJWJIXSYYyjV0Cn"
+  },
+  {
+  "artist": "j balvin",
+  "song_id": "61bN6ZGHtEBO8awDr8qsLt"
+  },
+  {
+  "artist": "jarabe de palo",
+  "song_id": "4Qv6iIGHLibtjLLkiZTcoQ"
+  },
+  {
+  "artist": "jason derulo",
+  "song_id": "4QtiVmuA88tPQiCOHZuQ5b"
+  },
+  {
+  "artist": "jawsh 685",
+  "song_id": "5T490vvoFNU6psep0NPmxs"
+  },
+  {
+  "artist": "jay wheeler",
+  "song_id": "30DGNzyp4dcTEfghdqthPO"
+  },
+  {
+  "artist": "jc reyes",
+  "song_id": "4h8Zprm12SgMLEecVIZvam"
+  },
+  {
+  "artist": "jeeiph",
+  "song_id": "3VTxyW0pK5QW1aidX5oFXr"
+  },
+  {
+  "artist": "jerry di",
+  "song_id": "2bL8BN2CdacUN0iAVDf2Y5"
+  },
+  {
+  "artist": "jhay cortez",
+  "song_id": "37eNjXNfxGEKpWP7VIwMtI"
+  },
+  {
+  "artist": "joel corry",
+  "song_id": "5zI3838wCc10HChwXiafKv"
+  },
+  {
+  "artist": "jowell & randy",
+  "song_id": "2YuERelLqHcVvCD9mzgO7n"
+  },
+  {
+  "artist": "juacko",
+  "song_id": "0RQ2v8mkJTIaKI1phcKnVX"
+  },
+  {
+  "artist": "juan magan",
+  "song_id": "1PfJfL05nzjtY6p67Kfxmu"
+  },
+  {
+  "artist": "juanka",
+  "song_id": "17GZbJ7hGLvIG6SaQwQfc8"
+  },
+  {
+  "artist": "juhn",
+  "song_id": "4DzpcoowaF0EY00i3KiRcK"
+  },
+  {
+  "artist": "justin bieber",
+  "song_id": "35wOifvruCwCJaYblqIflV"
+  },
+  {
+  "artist": "justin quiles",
+  "song_id": "6XSzJ3PyaVHjyTuFvnCLlE"
+  },
+  {
+  "artist": "karetta el gucci",
+  "song_id": "2nvy2ghOJTXuS17lSePbtE"
+  },
+  {
+  "artist": "karol g",
+  "song_id": "6q8Lb50EtqNeeJXXe8mMAH"
+  },
+  {
+  "artist": "kelly clarkson",
+  "song_id": "3knblvtjbcTtEk0HCiJHZK"
+  },
+  {
+  "artist": "kendo kaponi",
+  "song_id": "6wjRyhc3jiIhlosJqShxBK"
+  },
+  {
+  "artist": "khea",
+  "song_id": "6F9BrSf6kqJkV6Uyq589uj"
+  },
+  {
+  "artist": "kidd keo",
+  "song_id": "16GRJCvRoWxsRom3Pz9MXo"
+  },
+  {
+  "artist": "kiddo",
+  "song_id": "7hTAPDYgLvk4bdidaVteZ2"
+  },
+  {
+  "artist": "la la love you",
+  "song_id": "7bs4kBROKkS3IG2UdGYNvT"
+  },
+  {
+  "artist": "la ross maria",
+  "song_id": "1Ezk1cIIVTd1vt3JhMTiM8"
+  },
+  {
+  "artist": "la young",
+  "song_id": "1x0ISMkTdmhfqSh4Q3GDdL"
+  },
+  {
+  "artist": "lali",
+  "song_id": "5hoIOyMDt2cQx6DU0UyiBj"
+  },
+  {
+  "artist": "lalo ebratt",
+  "song_id": "4nyoGMA1aV1wjq0KqtqnQY"
+  },
+  {
+  "artist": "leiva",
+  "song_id": "6lGceeG8nl1PgitEOG3cWv"
+  },
+  {
+  "artist": "lele pons",
+  "song_id": "0jBjuo9ikAfl2gvwqwyiA3"
+  },
+  {
+  "artist": "lenny tavarez",
+  "song_id": "7J779fkUIZo3rTP6b2BY8n"
+  },
+  {
+  "artist": "lerica",
+  "song_id": "2GuMCgows8CdwbOuogDobo"
+  },
+  {
+  "artist": "lewis capaldi",
+  "song_id": "5hlMGa8LKxMTnWASM7uMLJ"
+  },
+  {
+  "artist": "lola indigo",
+  "song_id": "7IzbHY75UhGztauT7U5eKb"
+  },
+  {
+  "artist": "los legendarios",
+  "song_id": "2bgcUk2A3jjKbCJ7KPquTi"
+  },
+  {
+  "artist": "love yi",
+  "song_id": "3fpnUmAa6E2xnF0i21qc7I"
+  },
+  {
+  "artist": "lunay",
+  "song_id": "3T5QSIgoaPIh07SwixRDp7"
+  },
+  {
+  "artist": "lyanno",
+  "song_id": "5bxoaJCAVBsEmTaTiZw0YJ"
+  },
+  {
+  "artist": "maluma",
+  "song_id": "434J5LQCGuyjr7UA7j8bWb"
+  },
+  {
+  "artist": "manuel carrasco",
+  "song_id": "4NKxhCl5PKQbeAvYgug1G7"
+  },
+  {
+  "artist": "manuel turizo",
+  "song_id": "1ScD7XQYCKmJ3fdNh71lUE"
+  },
+  {
+  "artist": "marc anthony",
+  "song_id": "2uIuSumfgTKeRXiGw30LRT"
+  },
+  {
+  "artist": "maria becerra",
+  "song_id": "5vPtzdjJ9tm7XCoKDH22Gb"
+  },
+  {
+  "artist": "mariah carey",
+  "song_id": "0bYg9bo50gSsH3LtXe2SQn"
+  },
+  {
+  "artist": "marmi",
+  "song_id": "4dEeGyC2qgWF6K8zTJ2kvP"
+  },
+  {
+  "artist": "master kg",
+  "song_id": "2aak2xGowu5qNzfQRx9AqI"
+  },
+  {
+  "artist": "michael buble",
+  "song_id": "0EJGgmA2uxiasDM5DmDKL1"
+  },
+  {
+  "artist": "migrantes",
+  "song_id": "3FyqGRGfrSbiXEh4KBNxmE"
+  },
+  {
+  "artist": "miley cyrus",
+  "song_id": "6l6d6RvubUNbA3lFwuJdGf"
+  },
+  {
+  "artist": "mnek",
+  "song_id": "5XCJndUuktaxfVruAek3mT"
+  },
+  {
+  "artist": "morad",
+  "song_id": "3mZFOjJplVA5PTU5zmymZB"
+  },
+  {
+  "artist": "morat",
+  "song_id": "7z1wIFIRL7vklInexuBULL"
+  },
+  {
+  "artist": "mozart la para",
+  "song_id": "3QP2Q74rhpBFcLh3ub5E8Y"
+  },
+  {
+  "artist": "myke towers",
+  "song_id": "2noT2sKSPwS2cmKsN9ZaXD"
+  },
+  {
+  "artist": "natalia lacunza",
+  "song_id": "6kEfucDt5TavqT7dwhW6Cj"
+  },
+  {
+  "artist": "nathy peluso",
+  "song_id": "652oAvFglJKrmCCmInuLcc"
+  },
+  {
+  "artist": "natos y waor",
+  "song_id": "4CH72zq6gOXhJ1hUBNN44C"
+  },
+  {
+  "artist": "natti natasha",
+  "song_id": "2ijef6ni2amuunRoKTlgww"
+  },
+  {
+  "artist": "nengo flow",
+  "song_id": "2PTTanfSBNGRl5uAs3A3PO"
+  },
+  {
+  "artist": "nicki minaj",
+  "song_id": "1DfASEEKVByFKTgCArlkS5"
+  },
+  {
+  "artist": "nicki nicole",
+  "song_id": "0BNtpLD6zsXJGroRtcixOE"
+  },
+  {
+  "artist": "nicky jam",
+  "song_id": "7qCAVkHWZkF44OzOUKf8Cr"
+  },
+  {
+  "artist": "nil moliner",
+  "song_id": "1FATBmnU4iDkGOv5cw46QH"
+  },
+  {
+  "artist": "nio garcia",
+  "song_id": "5qaTxvR8tsEfivYI4lK3rh"
+  },
+  {
+  "artist": "omar montes",
+  "song_id": "1FamRhNikKO778Um3A5TTs"
+  },
+  {
+  "artist": "ozuna",
+  "song_id": "55NwAn7bAl1edTEg1azLOW"
+  },
+  {
+  "artist": "pablo alboran",
+  "song_id": "4nyeESsxQQgftlY1Xfifde"
+  },
+  {
+  "artist": "paris boy",
+  "song_id": "3hGvDKG43xRKpD62P8rlXs"
+  },
+  {
+  "artist": "pepe vizio",
+  "song_id": "4gFFY2PJadzWvYidHiyHoM"
+  },
+  {
+  "artist": "pereza",
+  "song_id": "5VJOeEGEhphuvtGZH0gbW9"
+  },
+  {
+  "artist": "piso 21",
+  "song_id": "13X0XdLMOdtbXVtAj2ox4h"
+  },
+  {
+  "artist": "pole.",
+  "song_id": "0gefYraLUfu378c8ucAa6T"
+  },
+  {
+  "artist": "pop smoke",
+  "song_id": "4wVuGccjXDNf9sWWVajkpk"
+  },
+  {
+  "artist": "prince royce",
+  "song_id": "4vrTnCFwFddGyc1uIg4LyX"
+  },
+  {
+  "artist": "ptazeta",
+  "song_id": "55C0glNSvxJDCfgHwiCZb1"
+  },
+  {
+  "artist": "randy",
+  "song_id": "6L9nKacbPmTDGG56Cz56yD"
+  },
+  {
+  "artist": "rauw alejandro",
+  "song_id": "3qn0bmOpjaAUl1Wxq9araf"
+  },
+  {
+  "artist": "reik",
+  "song_id": "3FehHrtefcLcKNYtdJH4Ka"
+  },
+  {
+  "artist": "rocco hunt",
+  "song_id": "05jBXwLISlGf0h3GsKfl9C"
+  },
+  {
+  "artist": "rosalia",
+  "song_id": "2Sfl7odHUmG7qc8SbqUyzE"
+  },
+  {
+  "artist": "rvfv",
+  "song_id": "6K4ynOkqSi4h77aBBn0HCF"
+  },
+  {
+  "artist": "saint jhn",
+  "song_id": "3j4S2BORvaH5YCFi2ET7Eb"
+  },
+  {
+  "artist": "sebastian yatra",
+  "song_id": "3dbhByTr2dtobhG5WQ6nZ0"
+  },
+  {
+  "artist": "sech",
+  "song_id": "6XSzJ3PyaVHjyTuFvnCLlE"
+  },
+  {
+  "artist": "shakira",
+  "song_id": "0DvW1OmI9N7ikF1yyHGiWr"
+  },
+  {
+  "artist": "shawn mendes",
+  "song_id": "6D8FZWtCQRtQUVT3mpjrZs"
+  },
+  {
+  "artist": "sia",
+  "song_id": "5ocP1cIe1dOc9A0q1MDNl2"
+  },
+  {
+  "artist": "sinsinati",
+  "song_id": "74CBYERIN0oOdZ6x9h2L3R"
+  },
+  {
+  "artist": "skechi kid",
+  "song_id": "5S7uSR6yYtnGHDAnMTQLLo"
+  },
+  {
+  "artist": "super yei",
+  "song_id": "1U7rDpFk49AWVgoBAMGBha"
+  },
+  {
+  "artist": "taburete",
+  "song_id": "7LC811R4mnceUJW0Wrw5Ud"
+  },
+  {
+  "artist": "tainy",
+  "song_id": "3jbT1Y5MoPwEIpZndDDwVq"
+  },
+  {
+  "artist": "taiu",
+  "song_id": "4pXW6ZAHBz7ODXTRKklWrM"
+  },
+  {
+  "artist": "tatool",
+  "song_id": "4pXW6ZAHBz7ODXTRKklWrM"
+  },
+  {
+  "artist": "the weeknd",
+  "song_id": "22SXyL6pUjwIvGWvgGjLov"
+  },
+  {
+  "artist": "tini",
+  "song_id": "5vgIL7CYICqgEwTHWoKTBY"
+  },
+  {
+  "artist": "tones and i",
+  "song_id": "76bvw5EDyhm1b3dfsOToYG"
+  },
+  {
+  "artist": "topic",
+  "song_id": "2Ln8KzONjBfBYoap9lNh7W"
+  },
+  {
+  "artist": "travis scott",
+  "song_id": "4vwfOiyWxXeEdx4ejAJgdx"
+  },
+  {
+  "artist": "trueno",
+  "song_id": "1AnWtLKn7r9rxK1cdCY4A6"
+  },
+  {
+  "artist": "wham!",
+  "song_id": "2vUBkHXhhZtSfwrX4i7L3f"
+  },
+  {
+  "artist": "wisin",
+  "song_id": "5ZuZWiChDM9Y6CfS5R15RP"
+  },
+  {
+  "artist": "yandel",
+  "song_id": "6aLLmYGDrw9ZVZo3d7eaUY"
+  },
+  {
+  "artist": "young martino",
+  "song_id": "578xKmCM2fLkfa8AkPsUb0"
+  },
+  {
+  "artist": "yung sarria",
+  "song_id": "04JTeJYt4vy4ml9E4K16XM"
+  },
+  {
+  "artist": "zion & lennox",
+  "song_id": "1dP3nZnXCMnVXcVVb1o3hP"
+  }
+  ]

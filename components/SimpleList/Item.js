@@ -9,6 +9,8 @@ export default function Item({
   desc,
   figure,
   label,
+  songId,
+  type,
   showGraph,
   graphKey,
   endpoint,
@@ -16,6 +18,17 @@ export default function Item({
 }) {
   const [data, setData] = useState(new Array(30).fill(0));
   const [error, setError] = useState(false);
+  const [image, setImage] = useState(null);
+
+  async function _fetchImage() {
+    const res = await fetch(`/api/${type}/${songId}`)
+      .then((r) => r.json())
+      .then((d) => d);
+
+    if (res.image) {
+      setImage(res.image);
+    }
+  }
 
   async function _fetchData() {
     let url = `https://api.tinybird.co/v0/pipes/${endpoint}.json?`;
@@ -44,6 +57,7 @@ export default function Item({
     if (showGraph) {
       _fetchData();
     }
+    _fetchImage();
   }, []);
 
   return (
@@ -52,6 +66,7 @@ export default function Item({
         maxWidth={showGraph ? "50%" : "75%"}
         title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
         desc={desc.replace(/\b\w/g, (l) => l.toUpperCase())}
+        image={image}
       />
       <div className="flex">
         {showGraph && <Graph graphHeight={30} graphWidth={125} data={data} />}

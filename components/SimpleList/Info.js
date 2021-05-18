@@ -1,9 +1,17 @@
-export default function Info({ title, desc, img, maxWidth }) {
+export default function Info({ title, desc, image, maxWidth }) {
   return (
     <div className="flex" style={{ maxWidth }}>
-      <div className="Avatar is-bigger as-bkg--tuna-100 mr-8">
-        <img src={img} alt={title} title={title} />
-      </div>
+      {image ? (
+        <img
+          className="Avatar is-bigger as-bkg--tuna-100 mr-8"
+          src={image}
+          alt={title}
+          title={title}
+        />
+      ) : (
+        <div className="Avatar is-bigger as-bkg--tuna-100 mr-8"></div>
+      )}
+
       <div className="overflow">
         <h4
           className="as-font--medium as-color--main no-spacing-1 overflow"

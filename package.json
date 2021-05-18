@@ -11,6 +11,7 @@
     "countries-list": "^2.6.1",
     "d3": "^6.7.0",
     "next": "10.2.0",
+    "node-fetch": "^2.6.1",
     "normalize-scss": "^7.0.1",
     "normalize.css": "^8.0.1",
     "numeral": "^2.0.6",

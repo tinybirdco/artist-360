@@ -1,7 +1,7 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import ServiceFilter from "../../components/ServiceFilter";
 import CountryDropdown from "../../components/CountryDropdown";
@@ -23,15 +23,34 @@ const Plays = dynamic(() => import("../../components/Plays"), {
 export default function Artist() {
   const [country, setCountry] = useState(null);
   const [service, setService] = useState(null);
+  const [avatar, setAvatar] = useState(null);
   const router = useRouter();
   const {
     query: { name },
   } = router;
   const token = process.env.NEXT_PUBLIC_TOKEN;
-
   const normalizedName = name
     ? name.replace(/\b\w/g, (l) => l.toUpperCase())
     : "";
+
+  async function _fetchArtistData() {
+    const res = await fetch(`/api/artist/${name}`)
+      .then((r) => r.json())
+      .then((d) => d);
+
+    if (res.avatar) {
+      setAvatar(res.avatar);
+    }
+  }
+
+  useEffect(
+    function () {
+      if (name) {
+        _fetchArtistData();
+      }
+    },
+    [name]
+  );
 
   return (
     <div>
@@ -50,7 +69,17 @@ export default function Artist() {
             <span className="Avatar as-bkg--tuna mr-6 ml-6"></span>
             <span>analytics:</span>
             <br />
-            <span className="Avatar as-bkg--tuna mr-6"></span>
+            {avatar ? (
+              <img
+                className="Avatar as-bkg--tuna mr-6"
+                src={avatar}
+                title={name}
+                alt={name}
+              />
+            ) : (
+              <span className="Avatar as-bkg--tuna mr-6"></span>
+            )}
+
             <span>{normalizedName}</span>
           </h1>
         </div>
@@ -101,11 +130,13 @@ export default function Artist() {
           size={"1/3"}
           title={"Top Songs"}
           endpoint={"ranking_by"}
-          item={({ song_title, plays }) => (
+          item={({ song_title, plays, song_id }) => (
             <Item
               key={song_title}
               title={song_title}
               figure={plays}
+              songId={song_id}
+              type={"song"}
               desc={name}
               showGraph={false}
               label={"Streams"}
@@ -124,7 +155,7 @@ export default function Artist() {
           size={"3/6"}
           title={"Top Albums"}
           endpoint={"ranking_by"}
-          item={({ album_name, plays }) => (
+          item={({ album_name, plays, song_id }) => (
             <Item
               key={album_name}
               title={album_name}
@@ -132,6 +163,8 @@ export default function Artist() {
               desc={name}
               showGraph={true}
               endpoint={"evolution_plays_income_from_mv"}
+              songId={song_id}
+              type={"album"}
               filters={{
                 country,
                 source: service,
