@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 
 import Header from "../../components/Header";
 import ServiceFilter from "../../components/ServiceFilter";
-import CountryDropdown from "../../components/CountryDropdown";
 import Footer from "../../components/Footer";
 import ArtistPageItem from "../../components/SimpleList/Item";
 
@@ -22,15 +21,20 @@ const Plays = dynamic(() => import("../../components/Plays"), {
   ssr: false,
 });
 
+const CountryDropdown = dynamic(
+  () => import("../../components/CountryDropdown"),
+  {
+    ssr: false,
+  }
+);
+
 const INTERVAL = 3000;
 
 export default function Artist() {
-  const [country, setCountry] = useState(null);
-  const [service, setService] = useState(null);
   const [avatar, setAvatar] = useState(null);
   const router = useRouter();
   const {
-    query: { name },
+    query: { name, country, service },
   } = router;
   const token = process.env.NEXT_PUBLIC_TOKEN;
   const normalizedName = name
@@ -103,11 +107,21 @@ export default function Artist() {
         <div style={{ gridColumn: "1/6" }} className="flex-between-center">
           <ServiceFilter
             value={service}
-            onChange={(service) => setService(service)}
+            onChange={(s) =>
+              router.push({
+                pathname: "/artist/[name]",
+                query: { name, service: s, country },
+              })
+            }
           />
           <CountryDropdown
             country={country}
-            onChange={(country) => setCountry(country)}
+            onChange={(c) =>
+              router.push({
+                pathname: "/artist/[name]",
+                query: { name, service, country: c },
+              })
+            }
           />
         </div>
 

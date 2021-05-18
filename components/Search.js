@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Fuse from "fuse.js";
 import { useRouter } from "next/router";
 
-import artists from "../public/data.json";
+import artists from "../public/artists.json";
 
 import styles from "../styles/Search.module.scss";
 

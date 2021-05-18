@@ -1,16 +1,19 @@
 import Select from "react-select";
-import { countries } from "countries-list";
+import countries from "../public/countries.json";
 
-export default function CountryDropdown({ value, onChange }) {
+export default function CountryDropdown({ country, onChange }) {
   const options = Object.keys(countries).map(function (key) {
-    const info = countries[key];
-    return { value: info.name, label: `${info.emoji} ${info.name}` };
+    const emoji = countries[key];
+    return { value: key, label: `${emoji} ${key}` };
   });
 
   return (
     <div style={{ width: "240px" }}>
       <Select
-        defaultValue={value}
+        defaultValue={{
+          label: `${countries[country]} ${country}`,
+          value: country,
+        }}
         options={options}
         isSearchable={true}
         isClearable={true}

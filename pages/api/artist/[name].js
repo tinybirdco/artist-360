@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import artists from "../../../public/data.json";
+import artists from "../../../public/artists.json";
 
 export default async (req, res) => {
   const { name } = req.query;

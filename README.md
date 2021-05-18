@@ -24,11 +24,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 All API endpoints used in this demo are available in this [page](https://api.tinybird.co/endpoints?token=p.eyJ1IjogIjI5ZGRlNDhjLTU3NDQtNDQ1Yy1iZTJhLThkMjdiNWM5NTVmNiIsICJpZCI6ICI2Zjk2M2U5NS1mMGZmLTQyOTctYTk3MC00NjcxZjBhMmMzYjgifQ.SJ8kGdkgPd3lG9C5MQb9EnGKovvOeiwo0AIUusU344Q).
 
 ## Pending
-- [ ] Deep linking
 - [x] Genres home block
 - [x] Countries home block
-- [ ] Home artists graph
 - [x] Home image
+- [x] Favicon
+- [ ] Home artists graph
+- [ ] Deep linking
 - [ ] Responsive
 - [ ] Graph issues
-- [ ] Favicon
