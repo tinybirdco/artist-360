@@ -1,4 +1,4 @@
-export default function Info({ title, desc, image, maxWidth }) {
+export default function Info({ title, desc, image, icon = "", maxWidth }) {
   return (
     <div className="flex" style={{ maxWidth }}>
       {image ? (
@@ -9,7 +9,13 @@ export default function Info({ title, desc, image, maxWidth }) {
           title={title}
         />
       ) : (
-        <div className="Avatar is-bigger as-bkg--tuna-100 mr-8"></div>
+        <div
+          className={`Avatar is-bigger as-bkg--${
+            !icon ? "tuna-100" : "light"
+          } mr-8`}
+        >
+          {icon && <span className="Avatar-icon">{icon}</span>}
+        </div>
       )}
 
       <div className="overflow">

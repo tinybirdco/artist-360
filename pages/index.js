@@ -1,20 +1,25 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ArtistItem from "../components/SimpleList/ArtistItem";
 import SongItem from "../components/SimpleList/SongItem";
+import CountryItem from "../components/SimpleList/CountryItem";
+import numeral from "numeral";
+import Genres from "../components/Genres";
 
 const SimpleList = dynamic(() => import("../components/SimpleList"), {
+  ssr: false,
+});
+
+const CountryList = dynamic(() => import("../components/CountryList"), {
   ssr: false,
 });
 
 const INTERVAL = 5000;
 
 export default function Home() {
-  const router = useRouter();
   const token = process.env.NEXT_PUBLIC_TOKEN;
 
   return (
@@ -40,13 +45,32 @@ export default function Home() {
             <span>analytics</span>
             <br />
             <span>by</span>
-            <img className="Avatar mr-6 ml-6" src="/music.png" />
+            <img
+              className="Avatar mr-6 ml-6"
+              src="/music.png"
+              alt="Music"
+              title="Music"
+            />
             <span>platform and</span>
             <br />
             <span>genre or</span>
-            <img className="Avatar mr-6 ml-6" src="/artist.png" />
+            <img
+              className="Avatar mr-6 ml-6"
+              src="/artist.png"
+              alt="Artist"
+              title="Artist"
+            />
             <span>artist</span>
           </h1>
+
+          <img
+            style={{
+              position: "absolute",
+              right: 0,
+              top: "120px",
+            }}
+            src="/graph.svg"
+          />
         </div>
 
         <div style={{ gridColumn: "1/6" }}>
@@ -104,6 +128,34 @@ export default function Home() {
           )}
           filters={{
             by: "song_title",
+            token,
+          }}
+          label={"Streams"}
+        />
+
+        <Genres size={"1/6"} />
+
+        <CountryList
+          interval={INTERVAL}
+          size={"1/6"}
+          title={"Top Countries"}
+          endpoint={"ranking_by"}
+          item={({ country, plays }) => (
+            <CountryItem
+              key={country}
+              title={country}
+              desc={
+                <>
+                  <span className="as-color--main">
+                    {numeral(plays).format(",")}
+                  </span>{" "}
+                  Streams
+                </>
+              }
+            />
+          )}
+          filters={{
+            by: "country",
             token,
           }}
           label={"Streams"}

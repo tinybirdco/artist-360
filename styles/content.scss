@@ -1,6 +1,7 @@
 @import 'vars';
 
 .Content {
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: $unit * 16px;

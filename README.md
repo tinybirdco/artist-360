@@ -25,8 +25,10 @@ All API endpoints used in this demo are available in this [page](https://api.tin
 
 ## Pending
 - [ ] Deep linking
-- [ ] Genres home block
-- [ ] Countries home block
+- [x] Genres home block
+- [x] Countries home block
+- [ ] Home artists graph
+- [x] Home image
 - [ ] Responsive
 - [ ] Graph issues
 - [ ] Favicon
