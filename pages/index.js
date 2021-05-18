@@ -1,15 +1,17 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import Item from "../components/SimpleList/Item";
+import ArtistItem from "../components/SimpleList/ArtistItem";
+import SongItem from "../components/SimpleList/SongItem";
 
 const SimpleList = dynamic(() => import("../components/SimpleList"), {
   ssr: false,
 });
+
+const INTERVAL = 5000;
 
 export default function Home() {
   const router = useRouter();
@@ -51,68 +53,62 @@ export default function Home() {
           <hr style={{ border: "0", borderTop: "1px solid #F2F2F2" }} />
         </div>
 
-        {/* <SimpleList
-          size={"3/6"}
-          title={"Top Albums"}
+        <SimpleList
+          interval={INTERVAL}
+          size={"1/4"}
+          title={"Top Artists"}
           endpoint={"ranking_by"}
-          item={({ album_name, plays, song_id }) => (
-            <Item
-              key={album_name}
-              title={album_name}
-              figure={plays}
-              desc={name}
-              showGraph={true}
-              endpoint={"evolution_plays_income_from_mv"}
-              songId={song_id}
-              type={"album"}
-              filters={{
-                country,
-                source: service,
-                album: album_name,
-                artist: name,
-                token,
-              }}
-              graphKey={"plays"}
-              label={"Streams"}
-            />
-          )}
+          item={({ artist, plays, song_id }) => {
+            return (
+              <ArtistItem
+                key={artist}
+                title={artist}
+                figure={plays}
+                dataId={artist}
+                type={"artist"}
+                filters={{
+                  artist,
+                  token,
+                }}
+                graphKey={"plays"}
+                desc={"-"}
+                showGraph={true}
+                label={"Streams"}
+              />
+            );
+          }}
           filters={{
-            country,
-            source: service,
-            artist: name,
-            by: "album_name",
+            by: "artist",
             token,
           }}
           label={"Streams"}
         />
 
         <SimpleList
-          size={"1/3"}
+          interval={INTERVAL}
+          size={"4/6"}
           title={"Top Songs"}
           endpoint={"ranking_by"}
           item={({ song_title, plays, song_id }) => (
-            <Item
+            <SongItem
               key={song_title}
               title={song_title}
               figure={plays}
-              songId={song_id}
-              type={"song"}
-              desc={name}
+              desc={"-"}
               showGraph={false}
+              endpoint={"evolution_plays_income_from_mv"}
+              dataId={song_id}
+              type={"song"}
               label={"Streams"}
             />
           )}
           filters={{
-            country,
-            source: service,
-            artist: name,
             by: "song_title",
             token,
           }}
           label={"Streams"}
-        /> */}
+        />
       </main>
-
       <Footer />
     </div>
   );

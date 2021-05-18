@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 import ServiceFilter from "../../components/ServiceFilter";
 import CountryDropdown from "../../components/CountryDropdown";
 import Footer from "../../components/Footer";
-import Item from "../../components/SimpleList/Item";
+import ArtistPageItem from "../../components/SimpleList/Item";
 
 const SimpleList = dynamic(() => import("../../components/SimpleList"), {
   ssr: false,
@@ -143,11 +143,11 @@ export default function Artist() {
           title={"Top Songs"}
           endpoint={"ranking_by"}
           item={({ song_title, plays, song_id }) => (
-            <Item
+            <ArtistPageItem
               key={song_title}
               title={song_title}
               figure={plays}
-              songId={song_id}
+              dataId={song_id}
               type={"song"}
               desc={name}
               showGraph={false}
@@ -169,14 +169,14 @@ export default function Artist() {
           title={"Top Albums"}
           endpoint={"ranking_by"}
           item={({ album_name, plays, song_id }) => (
-            <Item
+            <ArtistPageItem
               key={album_name}
               title={album_name}
               figure={plays}
               desc={name}
               showGraph={true}
               endpoint={"evolution_plays_income_from_mv"}
-              songId={song_id}
+              dataId={song_id}
               type={"album"}
               filters={{
                 country,

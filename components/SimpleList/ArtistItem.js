@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 import Info from "./Info";
 import Figure from "./Figure";
 import Graph from "../SimpleGraph";
+import numeral from "numeral";
 
-export default function Item({
+export default function ArtistItem({
   title,
   desc,
   figure,
@@ -19,19 +21,19 @@ export default function Item({
   const [data, setData] = useState(new Array(30).fill(0));
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
-  const [artists, setArtists] = useState(null);
+  const [followers, setFollowers] = useState(null);
 
   async function _fetchImage() {
     const res = await fetch(`/api/${type}/${dataId}`)
       .then((r) => r.json())
       .then((d) => d);
 
-    if (res.image) {
-      setImage(res.image);
+    if (res.avatar) {
+      setImage(res.avatar);
     }
 
-    if (res.artists) {
-      setArtists(res.artists);
+    if (res.followers) {
+      setFollowers(res.followers);
     }
   }
 
@@ -67,12 +69,18 @@ export default function Item({
 
   return (
     <li className="flex-between-center pv-5">
-      <Info
-        maxWidth={showGraph ? "50%" : "60%"}
-        title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
-        desc={artists ? artists.map((a) => a.name).join(", ") : desc}
-        image={image}
-      />
+      <Link href={`/artist/${title}`}>
+        <a style={{ width: "100%", textDecoration: "none", cursor: "pointer" }}>
+          <Info
+            maxWidth={"100%"}
+            title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
+            desc={
+              followers ? `${numeral(followers).format(",")} followers` : "-"
+            }
+            image={image}
+          />
+        </a>
+      </Link>
       <div className="flex">
         {showGraph && <Graph graphHeight={30} graphWidth={125} data={data} />}
         <Figure label={label} number={figure} />

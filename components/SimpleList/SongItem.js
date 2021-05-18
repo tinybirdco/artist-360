@@ -4,7 +4,7 @@ import Info from "./Info";
 import Figure from "./Figure";
 import Graph from "../SimpleGraph";
 
-export default function Item({
+export default function SongItem({
   title,
   desc,
   figure,
@@ -19,6 +19,7 @@ export default function Item({
   const [data, setData] = useState(new Array(30).fill(0));
   const [error, setError] = useState(false);
   const [image, setImage] = useState(null);
+  const [album, setAlbum] = useState(null);
   const [artists, setArtists] = useState(null);
 
   async function _fetchImage() {
@@ -28,6 +29,10 @@ export default function Item({
 
     if (res.image) {
       setImage(res.image);
+    }
+
+    if (res.album) {
+      setAlbum(res.album);
     }
 
     if (res.artists) {

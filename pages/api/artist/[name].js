@@ -5,6 +5,7 @@ export default async (req, res) => {
   const { name } = req.query;
   const token = process.env.SPOTIFY_TOKEN;
   let avatar = null;
+  let followers = null;
   const artistObj = artists.find((a) => a.artist === name);
 
   if (artistObj) {
@@ -54,9 +55,10 @@ export default async (req, res) => {
       if (!artist.error) {
         const image = artist.data.images.slice(-1)[0];
         avatar = image.url;
+        followers = artist.data.followers.total;
       }
     }
   }
 
-  res.status(200).json({ name, avatar });
+  res.status(200).json({ name, avatar, followers });
 };
