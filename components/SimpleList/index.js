@@ -1,37 +1,38 @@
 import { useEffect, useState } from "react";
-import useVisibilityChange from "use-visibility-change";
 
-import Info from "./Info";
-import Figure from "./Figure";
-import Graph from "../SimpleGraph";
 import LoadingItem from "./LoadingItem";
 import Loader from "../Loader";
-import useRequestChainInterval from "../../utils/use-request-chain-interval";
 
 export default function SimpleList({
   size,
   title,
-  showGraph = false,
   endpoint,
-  interval,
+  items = 3,
+  item,
   filters,
 }) {
-  const [localInterval, setLocalInterval] = useState(interval);
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]); // name, desc, figure, graph
+  const [data, setData] = useState(null);
   const [error, setError] = useState(false);
 
   async function _fetchData() {
     setLoading(true);
 
-    const { error, data } = await fetch(
-      `https://api.tinybird.co/v0/pipe/${endpoint}.json`
-    )
-      .then((data) => ({ data }))
+    let url = `https://api.tinybird.co/v0/pipes/${endpoint}.json?`;
+    Object.keys(filters).forEach(function (key) {
+      if (filters[key]) {
+        const value = encodeURIComponent(filters[key]);
+        url += `&${key}=${value}`;
+      }
+    });
+
+    const { error, data } = await fetch(url)
+      .then((r) => r.json())
+      .then((d) => ({ data: d.data, error: d.error }))
       .catch((e) => ({ error: e.toString() }));
 
     if (error) {
-      setLocalInterval(null);
+      setData(null);
       setError(error);
     } else {
       setData(data);
@@ -41,29 +42,14 @@ export default function SimpleList({
     setLoading(false);
   }
 
-  useRequestChainInterval(_fetchData, localInterval);
-
-  useVisibilityChange({
-    onShow: () => {
-      setLocalInterval(interval);
-    },
-    onHide: () => {
-      setLocalInterval(null);
-    },
-  });
-
-  useEffect(() => {
-    setLocalInterval(interval);
-  }, [interval]);
-
   useEffect(
     function () {
-      if (localInterval) {
-        _fetchData();
-      }
+      _fetchData();
     },
-    [localInterval, filters]
+    [filters]
   );
+
+  console.log(data);
 
   return (
     <div className="Card" style={{ gridColumn: size }}>
@@ -74,22 +60,14 @@ export default function SimpleList({
       </h3>
 
       <ul className="mt-12">
-        {(loading && !data.length) || (error && !data.length) ? (
+        {(loading && !data) || error ? (
           <>
             <LoadingItem />
             <LoadingItem />
             <LoadingItem />
           </>
         ) : (
-          <>
-            <li className="flex-between-center pv-5">
-              <Info title="Otra noche sin tí" desc={"J. Balvin, Khalid"} />
-              <div className="flex">
-                {showGraph && <Graph />}
-                <Figure label="Streams" number={2432432} />
-              </div>
-            </li>
-          </>
+          <>{data.slice(0, items).map((d, i) => item(d))}</>
         )}
       </ul>
 

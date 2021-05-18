@@ -1,68 +1,73 @@
 import { useEffect, useState } from "react";
-import useVisibilityChange from "use-visibility-change";
 
-// import Info from "./Info";
-// import Figure from "./Figure";
 import SimpleGraph from "../SimpleGraph";
-// import LoadingItem from "./LoadingItem";
-import useRequestChainInterval from "../../utils/use-request-chain-interval";
 import Loader from "../Loader";
+import numeral from "numeral";
+import { CountUp } from "use-count-up";
 
-export default function Performance({
-  size,
-  title,
-  showGraph = false,
-  endpoint,
-  interval,
-  filters,
-}) {
-  const [localInterval, setLocalInterval] = useState(interval);
+export default function Performance({ size, endpoint, filters }) {
   const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]); // revenue, stats, monthly listeners and followers
+  const [data, setData] = useState(null);
   const [error, setError] = useState(false);
+  const [daysStats, setDaysStats] = useState(new Array(30).fill(0));
+  const [revenue, setRevenue] = useState(0);
+  const [plays, setPlays] = useState(0);
 
   async function _fetchData() {
     setLoading(true);
 
-    const { error, data } = await fetch(
-      `https://api.tinybird.co/v0/pipe/${endpoint}.json`
-    )
-      .then((data) => ({ data }))
+    let url = `https://api.tinybird.co/v0/pipes/${endpoint}.json?`;
+    Object.keys(filters).forEach(function (key) {
+      if (filters[key]) {
+        const value = encodeURIComponent(filters[key]);
+        url += `&${key}=${value}`;
+      }
+    });
+
+    const { error, data } = await fetch(url)
+      .then((r) => r.json())
+      .then((d) => ({ data: d.data, error: d.error }))
       .catch((e) => ({ error: e.toString() }));
 
     if (error) {
-      setLocalInterval(null);
       setError(error);
+      setData(null);
     } else {
-      setData(data);
+      setData(data.slice(-30));
       setError(null);
     }
 
     setLoading(false);
   }
 
-  useRequestChainInterval(_fetchData, localInterval);
+  useEffect(
+    function () {
+      if (data) {
+        let d = {
+          totalIncome: 0,
+          totalPlays: 0,
+          stats: [],
+        };
 
-  useVisibilityChange({
-    onShow: () => {
-      setLocalInterval(interval);
-    },
-    onHide: () => {
-      setLocalInterval(null);
-    },
-  });
+        data.forEach(({ income, plays }) => {
+          d.totalIncome = d.totalIncome + income;
+          d.totalPlays = d.totalPlays + plays;
+          d.stats.push(plays);
+        });
 
-  useEffect(() => {
-    setLocalInterval(interval);
-  }, [interval]);
+        setRevenue(d.totalIncome);
+        setPlays(d.totalPlays);
+        setDaysStats(d.stats);
+      }
+    },
+    [data]
+  );
 
   useEffect(
     function () {
-      if (localInterval) {
-        _fetchData();
-      }
+      _fetchData();
     },
-    [localInterval, filters]
+    [filters]
   );
 
   return (
@@ -75,16 +80,18 @@ export default function Performance({
         {loading && <Loader className="ml-4" />}
       </h3>
 
-      <SimpleGraph
-        data={[
-          100, 234, 23, 234, 2, 324, 234, 100, 234, 23, 234, 2, 324, 234, 559,
-          234, 23, 124, 734, 789,
-        ]}
-      />
+      <SimpleGraph data={daysStats} />
 
       <div className="mt-10">
         <h3 className="as-font--huge-bold as-color--main no-spacing-3">
-          123,552€
+          <CountUp
+            isCounting
+            start={0}
+            end={revenue}
+            duration={1}
+            suffix={"€"}
+            formatter={(v) => `${numeral(v).format(",")}€`}
+          />
         </h3>
         <label className="as-font--small-light">
           <span className="as-color--main">Revenue</span>
@@ -108,30 +115,15 @@ export default function Performance({
             </label>
           </div>
           <h5 className="as-font--title-bold as-color--main no-spacing-1">
-            54,5M
+            <CountUp
+              isCounting
+              end={plays}
+              duration={1}
+              formatter={(v) => numeral(plays).format("0a")}
+            />
           </h5>
         </li>
       </ul>
-
-      {/* <ul className="mt-12">
-        {(loading && !data.length) || (error && !data.length) ? (
-          <>
-            <LoadingItem />
-            <LoadingItem />
-            <LoadingItem />
-          </>
-        ) : (
-          <>
-            <li className="flex-between-center pv-5">
-              <Info title="Otra noche sin tí" desc={"J. Balvin, Khalid"} />
-              <div className="flex">
-                {showGraph && <Graph />}
-                <Figure label="Streams" number={2432432} />
-              </div>
-            </li>
-          </>
-        )}
-      </ul> */}
     </div>
   );
 }

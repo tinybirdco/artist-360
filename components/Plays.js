@@ -13,8 +13,6 @@ const TIME_FRAME_OPTIONS = [
 ];
 
 export default function Plays({ size, endpoint, filters }) {
-  const [data, setData] = useState([]); // name, desc, figure, graph
-  const [error, setError] = useState(false);
   const [timeFrame, setTimeFrame] = useState(0);
 
   return (
@@ -26,7 +24,7 @@ export default function Plays({ size, endpoint, filters }) {
         </h3>
         <ul className="flex">
           {TIME_FRAME_OPTIONS.map(([label, minutes]) => (
-            <li className="ml-6">
+            <li key={`filter-${label}`} className="ml-6">
               <button
                 onClick={() => setTimeFrame(minutes)}
                 className={`as-color--${

@@ -45,7 +45,7 @@ export default function ComplexGraph({
   }
 
   async function _fetchData() {
-    let url = `https://api.tinybird.co/v0/pipes/${endpoint}.json?token=p.eyJ1IjogIjI5ZGRlNDhjLTU3NDQtNDQ1Yy1iZTJhLThkMjdiNWM5NTVmNiIsICJpZCI6ICIwMDJjMTZmNS03ZTFjLTQ2ZGUtOTMwMC1lY2QwNmNiMmI1NTQifQ.gW3mFVMXNeSZzT-5yCRxjeP6xMuEC_5ndeH2GbkAwAw`;
+    let url = `https://api.tinybird.co/v0/pipes/${endpoint}.json?`;
     Object.keys(filters).forEach(function (key) {
       if (filters[key]) {
         const value = encodeURIComponent(filters[key]);
@@ -55,7 +55,7 @@ export default function ComplexGraph({
 
     const { error, data } = await fetch(url)
       .then((r) => r.json())
-      .then((d) => ({ data: d.data }))
+      .then((d) => ({ data: d.data, error: d.error }))
       .catch((e) => ({ error: e.toString() }));
 
     if (!error && data.length > 0) {

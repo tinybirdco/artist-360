@@ -19,6 +19,7 @@
     "react-select": "^4.3.1",
     "reset.css": "^2.0.2",
     "sass": "^1.32.13",
+    "use-count-up": "^2.3.1",
     "use-visibility-change": "^0.3.0"
   }
 }

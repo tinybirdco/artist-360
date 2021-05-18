@@ -6,6 +6,7 @@ import { useState } from "react";
 import ServiceFilter from "../../components/ServiceFilter";
 import CountryDropdown from "../../components/CountryDropdown";
 import Footer from "../../components/Footer";
+import Item from "../../components/SimpleList/Item";
 
 const SimpleList = dynamic(() => import("../../components/SimpleList"), {
   ssr: false,
@@ -28,6 +29,7 @@ export default function Artist() {
   const {
     query: { name },
   } = router;
+  const token = process.env.NEXT_PUBLIC_TOKEN;
 
   const normalizedName = name
     ? name.replace(/\b\w/g, (l) => l.toUpperCase())
@@ -76,47 +78,70 @@ export default function Artist() {
           size={"1/4"}
           endpoint={{
             rt: "evolution_plays_income_per_second",
-            fixed: "evolution_plays_income",
+            fixed: "evolution_plays_income_from_mv",
           }}
           filters={{
             country,
             source: service,
             artist: name,
+            token,
           }}
         />
 
         <Performance
-          interval={INTERVAL_REFRESH}
           size={"4/6"}
-          endpoint={"whatever"}
+          endpoint={"evolution_plays_income_from_mv"}
           filters={{
             country,
             source: service,
             artist: name,
+            token,
           }}
         />
 
         <SimpleList
-          interval={INTERVAL_REFRESH}
           size={"1/3"}
           title={"Top Songs"}
-          endpoint={"whatever"}
+          endpoint={"ranking_by"}
+          item={({ song_title, plays }) => (
+            <Item
+              key={song_title}
+              title={song_title}
+              figure={plays}
+              desc={name}
+              showGraph={false}
+              label={"Streams"}
+            />
+          )}
           filters={{
             country,
             source: service,
             artist: name,
+            by: "song_title",
+            token,
           }}
           label={"Streams"}
         />
         <SimpleList
-          interval={INTERVAL_REFRESH}
           size={"3/6"}
           title={"Top Albums"}
-          endpoint={"whatever"}
+          endpoint={"ranking_by"}
+          item={({ album_title, plays }) => (
+            <Item
+              key={album_title}
+              title={album_title}
+              figure={plays}
+              desc={name}
+              showGraph={true}
+              label={"Streams"}
+            />
+          )}
           filters={{
             country,
             service,
             artist: name,
+            by: "album",
+            token,
           }}
           label={"Streams"}
         />
