@@ -65,7 +65,7 @@ export default function Artist() {
 
       <main className="Content">
         <div style={{ gridColumn: "1/6" }}>
-          <h1 className="as-font--huge-bold no-spacing-3">
+          <h1 className="as-font--huge-bold no-spacing-3 mv-34">
             <span>Real-time</span>
             <svg
               className="mr-6 ml-6"

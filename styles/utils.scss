@@ -1,6 +1,6 @@
 @import 'vars';
 
-@for $i from 0 through 30 {
+@for $i from 0 through 50 {
   .p-#{$i} { padding: #{$unit * $i}px; }
   .pt-#{$i} { padding-top: #{$unit * $i}px; }
   .pr-#{$i} { padding-right: #{$unit * $i}px; }
