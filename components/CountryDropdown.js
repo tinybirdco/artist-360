@@ -10,10 +10,14 @@ export default function CountryDropdown({ country, onChange }) {
   return (
     <div style={{ width: "240px" }}>
       <Select
-        defaultValue={{
-          label: `${countries[country]} ${country}`,
-          value: country,
-        }}
+        defaultValue={
+          country
+            ? {
+                label: `${countries[country]} ${country}`,
+                value: country,
+              }
+            : null
+        }
         options={options}
         isSearchable={true}
         isClearable={true}
