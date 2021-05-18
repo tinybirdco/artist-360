@@ -8,6 +8,7 @@ const ANIMATION_SPEED = 3000;
 export default function ComplexGraph({
   endpoint,
   filters,
+  timeFrame,
   key = "plays",
   animate,
   graphWidth = 376,
@@ -16,13 +17,13 @@ export default function ComplexGraph({
   strokeOpacity = "0.1",
   strokeWidth = 3,
 }) {
-  const n = 55;
+  const [n, setN] = useState(!timeFrame ? 55 : timeFrame);
   const [data, setData] = useState(new Array(n + 2).fill(0));
   const [visible, setVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
   const d3Container = useRef(null);
   const barWidth = graphWidth / n;
-  const margin = { top: 5, right: 0, bottom: 10, left: 0 };
+  const margin = { top: 5, right: 5, bottom: 10, left: 5 };
 
   async function _setFullData() {
     let d = await _fetchData();
@@ -59,7 +60,7 @@ export default function ComplexGraph({
       .catch((e) => ({ error: e.toString() }));
 
     if (!error && data.length > 0) {
-      return data.slice(0, 57);
+      return data.slice(0, !timeFrame ? 57 : timeFrame);
     } else {
       return null;
     }
@@ -100,10 +101,15 @@ export default function ComplexGraph({
           .ease(easeLinear)
           .attr("transform", "translate(" + xScale(-1) + "," + margin.top + ")")
           .on("end", function () {
-            if (visible) {
+            if (visible && !timeFrame) {
               _setLastOcc();
             }
           });
+      } else {
+        svg
+          .select(".content")
+          .attr("transform", "translate(0," + margin.top + ")")
+          .interrupt();
       }
 
       svg
@@ -148,11 +154,20 @@ export default function ComplexGraph({
 
   useEffect(
     function () {
+      if (mounted) {
+        setN(!timeFrame ? 55 : timeFrame);
+      }
+    },
+    [timeFrame]
+  );
+
+  useEffect(
+    function () {
       if (mounted && visible) {
         _setFullData();
       }
     },
-    [filters, endpoint]
+    [filters, endpoint, timeFrame]
   );
 
   useEffect(
@@ -262,14 +277,16 @@ export default function ComplexGraph({
             ></line>
           </g>
         </g>
-        <rect
-          x="0"
-          y="0"
-          width={80}
-          height={graphHeight + margin.top + margin.bottom}
-          fill="url(#gradient)"
-          style={{ pointerEvents: "none" }}
-        />
+        {!timeFrame && (
+          <rect
+            x="0"
+            y="0"
+            width={80}
+            height={graphHeight + margin.top + margin.bottom}
+            fill="url(#gradient)"
+            style={{ pointerEvents: "none" }}
+          />
+        )}
       </g>
     </svg>
   );
