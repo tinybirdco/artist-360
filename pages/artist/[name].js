@@ -20,8 +20,6 @@ const Plays = dynamic(() => import("../../components/Plays"), {
   ssr: false,
 });
 
-const INTERVAL_REFRESH = 3000;
-
 export default function Artist() {
   const [country, setCountry] = useState(null);
   const [service, setService] = useState(null);
