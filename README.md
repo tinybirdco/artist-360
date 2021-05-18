@@ -29,6 +29,6 @@ All API endpoints used in this demo are available in this [page](https://api.tin
 - [x] Home image
 - [x] Favicon
 - [x] Deep linking
-- [ ] Home artists graph
+- [x] Home artists graph
 - [ ] Responsive
 - [ ] Graph issues
