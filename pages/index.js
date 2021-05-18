@@ -82,9 +82,10 @@ export default function Home() {
           size={"1/4"}
           title={"Top Artists"}
           endpoint={"ranking_by"}
-          item={({ artist, plays, song_id }) => {
+          item={({ artist, plays }) => {
             return (
               <ArtistItem
+                endpoint={"evolution_plays_income_from_mv"}
                 key={artist}
                 title={artist}
                 figure={plays}
