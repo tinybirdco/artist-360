@@ -5,14 +5,12 @@ import Graph from "./ComplexGraph";
 
 const TIME_FRAME_OPTIONS = [
   ["Real time", 0],
-  ["1h", 1],
-  ["1d", 24],
-  ["7d", 168],
-  ["1m", 5040],
-  ["All"],
+  ["7d", 7],
+  ["1m", 30],
+  ["All", 72],
 ];
 
-export default function Plays({ size, endpoint, filters }) {
+export default function Plays({ size, endpoint, filters = {} }) {
   const [timeFrame, setTimeFrame] = useState(0);
 
   return (
@@ -39,9 +37,13 @@ export default function Plays({ size, endpoint, filters }) {
       </div>
       <div className="mt-30">
         <Graph
+          timeFrame={timeFrame}
           animate={timeFrame === 0}
           endpoint={endpoint[timeFrame === 0 ? "rt" : "fixed"]}
-          filters={filters}
+          filters={{
+            ...filters,
+            days: timeFrame,
+          }}
           graphWidth={600}
           graphHeight={200}
           strokeColor={"#000"}
