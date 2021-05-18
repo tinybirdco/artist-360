@@ -126,21 +126,30 @@ export default function Artist() {
           size={"3/6"}
           title={"Top Albums"}
           endpoint={"ranking_by"}
-          item={({ album_title, plays }) => (
+          item={({ album_name, plays }) => (
             <Item
-              key={album_title}
-              title={album_title}
+              key={album_name}
+              title={album_name}
               figure={plays}
               desc={name}
               showGraph={true}
+              endpoint={"evolution_plays_income_from_mv"}
+              filters={{
+                country,
+                source: service,
+                album: album_name,
+                artist: name,
+                token,
+              }}
+              graphKey={"plays"}
               label={"Streams"}
             />
           )}
           filters={{
             country,
-            service,
+            source: service,
             artist: name,
-            by: "album",
+            by: "album_name",
             token,
           }}
           label={"Streams"}

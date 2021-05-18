@@ -12,7 +12,7 @@ export default function Info({ title, desc, img }) {
           {title}
         </h4>
         <p
-          className="as-font--small-light as-color--tuna-100 no-spacing-1 mt-2 overflow"
+          className="as-font--small-light as-color--tuna-200 no-spacing-1 mt-2 overflow"
           title={desc}
         >
           {desc}

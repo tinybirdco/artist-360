@@ -49,8 +49,6 @@ export default function SimpleList({
     [filters]
   );
 
-  console.log(data);
-
   return (
     <div className="Card" style={{ gridColumn: size }}>
       <label className="as-font--caption as-color--tuna-200">LISTS</label>
@@ -67,7 +65,7 @@ export default function SimpleList({
             <LoadingItem />
           </>
         ) : (
-          <>{data.slice(0, items).map((d, i) => item(d))}</>
+          <>{data.slice(0, items).map((d, i) => item(d, i, data))}</>
         )}
       </ul>
 

@@ -1,6 +1,6 @@
 export default function Figure({ label, number }) {
   return (
-    <div style={{ textAlign: "right" }}>
+    <div style={{ textAlign: "right" }} className="ml-16">
       <p className="as-font--medium as-color--main no-spacing-1">
         {number.toLocaleString()}
       </p>
