@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+import Header from "../../components/Header";
 import ServiceFilter from "../../components/ServiceFilter";
 import CountryDropdown from "../../components/CountryDropdown";
 import Footer from "../../components/Footer";
@@ -60,13 +61,43 @@ export default function Artist() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header></header>
+      <Header name={name} />
 
       <main className="Content">
         <div style={{ gridColumn: "1/6" }}>
           <h1 className="as-font--huge-bold no-spacing-3">
             <span>Real-time</span>
-            <span className="Avatar as-bkg--tuna mr-6 ml-6"></span>
+            <svg
+              className="mr-6 ml-6"
+              width="48"
+              height="48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="48" height="48" rx="12" fill="url(#paint0_linear)" />
+              <path
+                opacity=".6"
+                d="M38 12.398L29.259 10l-3.076 6.873L38 12.397zM29.78 29.27l-7.966-3.234L16.936 38l12.844-8.73z"
+                fill="#fff"
+              />
+              <path
+                d="M10 22.316l19.641 7.03 3.221-15.019L10 22.316z"
+                fill="#fff"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear"
+                  x1="49.737"
+                  y1="0"
+                  x2="-8.794"
+                  y2="-.393"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stopColor="#22CD88" />
+                  <stop offset=".982" stopColor="#04BAF5" />
+                </linearGradient>
+              </defs>
+            </svg>
             <span>analytics:</span>
             <br />
             {avatar ? (

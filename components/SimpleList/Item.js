@@ -63,7 +63,7 @@ export default function Item({
   return (
     <li className="flex-between-center pv-5">
       <Info
-        maxWidth={showGraph ? "50%" : "75%"}
+        maxWidth={showGraph ? "50%" : "70%"}
         title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
         desc={desc.replace(/\b\w/g, (l) => l.toUpperCase())}
         image={image}

@@ -69,18 +69,24 @@ export default function SimpleList({
         )}
       </ul>
 
-      <button className="flex as-font--medium as-color--main mt-12">
-        <span className="no-spacing-1">View all</span>
-        <svg
-          className="ml-3"
-          width="12"
-          height="12"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path opacity=".2" d="M.5 11.5l11-11m0 0v11m0-11H.5" stroke="#000" />
-        </svg>
-      </button>
+      {data && data.length > 3 && (
+        <button className="flex as-font--medium as-color--main mt-12">
+          <span className="no-spacing-1">View all</span>
+          <svg
+            className="ml-3"
+            width="12"
+            height="12"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              opacity=".2"
+              d="M.5 11.5l11-11m0 0v11m0-11H.5"
+              stroke="#000"
+            />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }
