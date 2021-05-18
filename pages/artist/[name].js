@@ -47,6 +47,7 @@ export default function Artist() {
   useEffect(
     function () {
       if (name) {
+        setAvatar(null);
         _fetchArtistData();
       }
     },
