@@ -58,7 +58,7 @@ export default function SimpleList({
       </h3>
 
       <ul className="mt-12">
-        {(loading && !data) || error ? (
+        {(loading && !data) || error || !data.length ? (
           <>
             <LoadingItem />
             <LoadingItem />
