@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -20,6 +21,8 @@ const Performance = dynamic(() => import("../../components/Performance"), {
 const Plays = dynamic(() => import("../../components/Plays"), {
   ssr: false,
 });
+
+const INTERVAL = 3000;
 
 export default function Artist() {
   const [country, setCountry] = useState(null);
@@ -67,7 +70,9 @@ export default function Artist() {
       <main className="Content">
         <div style={{ gridColumn: "1/6" }}>
           <h1 className="as-font--huge-bold no-spacing-3 mv-34">
-            <span>Real-time</span>
+            <Link href="/">
+              <a className="as-color--main">Real-time</a>
+            </Link>
             <svg
               className="mr-6 ml-6"
               width="48"
@@ -116,8 +121,6 @@ export default function Artist() {
           </h1>
         </div>
 
-        <div style={{ gridColumn: "4/6" }}></div>
-
         <div style={{ gridColumn: "1/6" }}>
           <hr style={{ border: "0", borderTop: "1px solid #F2F2F2" }} />
         </div>
@@ -148,6 +151,7 @@ export default function Artist() {
         />
 
         <Performance
+          interval={INTERVAL}
           size={"4/6"}
           endpoint={"evolution_plays_income_from_mv"}
           filters={{
@@ -159,6 +163,7 @@ export default function Artist() {
         />
 
         <SimpleList
+          interval={INTERVAL}
           size={"1/3"}
           title={"Top Songs"}
           endpoint={"ranking_by"}
@@ -184,6 +189,7 @@ export default function Artist() {
           label={"Streams"}
         />
         <SimpleList
+          interval={INTERVAL}
           size={"3/6"}
           title={"Top Albums"}
           endpoint={"ranking_by"}

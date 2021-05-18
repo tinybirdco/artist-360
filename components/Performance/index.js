@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
+import useVisibilityChange from "use-visibility-change";
 
 import SimpleGraph from "../SimpleGraph";
 import Loader from "../Loader";
 import numeral from "numeral";
 import { CountUp } from "use-count-up";
+import useRequestChainInterval from "../../utils/use-request-chain-interval";
 
-export default function Performance({ size, endpoint, filters }) {
+export default function Performance({ size, endpoint, filters, interval }) {
+  const [localInterval, setLocalInterval] = useState(interval);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
@@ -32,6 +35,7 @@ export default function Performance({ size, endpoint, filters }) {
     if (error) {
       setError(error);
       setData(null);
+      setLocalInterval(null);
     } else {
       setData(data.slice(-30));
       setError(null);
@@ -63,11 +67,28 @@ export default function Performance({ size, endpoint, filters }) {
     [data]
   );
 
+  useRequestChainInterval(_fetchData, localInterval);
+
+  useVisibilityChange({
+    onShow: () => {
+      setLocalInterval(interval);
+    },
+    onHide: () => {
+      setLocalInterval(null);
+    },
+  });
+
+  useEffect(() => {
+    setLocalInterval(interval);
+  }, [interval]);
+
   useEffect(
     function () {
-      _fetchData();
+      if (localInterval) {
+        _fetchData();
+      }
     },
-    [filters]
+    [localInterval, filters]
   );
 
   return (
@@ -90,7 +111,7 @@ export default function Performance({ size, endpoint, filters }) {
             end={revenue}
             duration={1}
             suffix={"€"}
-            formatter={(v) => `${numeral(v).format(",")}€`}
+            formatter={(v) => `${numeral(v).format("0,0.0")}€`}
           />
         </h3>
         <label className="as-font--small-light">
@@ -119,7 +140,7 @@ export default function Performance({ size, endpoint, filters }) {
               isCounting
               end={plays}
               duration={1}
-              formatter={(v) => numeral(plays).format("0a")}
+              formatter={(v) => numeral(plays).format("0.0a")}
             />
           </h5>
         </li>

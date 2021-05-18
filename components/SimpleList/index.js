@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import useVisibilityChange from "use-visibility-change";
 
 import LoadingItem from "./LoadingItem";
 import Loader from "../Loader";
+import useRequestChainInterval from "../../utils/use-request-chain-interval";
 
 export default function SimpleList({
   size,
@@ -10,7 +12,9 @@ export default function SimpleList({
   items = 3,
   item,
   filters,
+  interval,
 }) {
+  const [localInterval, setLocalInterval] = useState(interval);
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(false);
@@ -34,6 +38,7 @@ export default function SimpleList({
     if (error) {
       setData(null);
       setError(error);
+      setLocalInterval(null);
     } else {
       setData(data);
       setError(null);
@@ -42,11 +47,28 @@ export default function SimpleList({
     setLoading(false);
   }
 
+  useRequestChainInterval(_fetchData, localInterval);
+
+  useVisibilityChange({
+    onShow: () => {
+      setLocalInterval(interval);
+    },
+    onHide: () => {
+      setLocalInterval(null);
+    },
+  });
+
+  useEffect(() => {
+    setLocalInterval(interval);
+  }, [interval]);
+
   useEffect(
     function () {
-      _fetchData();
+      if (localInterval) {
+        _fetchData();
+      }
     },
-    [filters]
+    [localInterval, filters]
   );
 
   return (
