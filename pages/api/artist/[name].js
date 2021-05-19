@@ -1,14 +1,13 @@
 import fetch from "node-fetch";
 import artists from "../../../public/artists.json";
 import artistData from "../../../public/artist-data.json";
-import capitalizeString from "../../../utils/capitalize-string";
 
 export default async (req, res) => {
   const { name } = req.query;
   const token = process.env.SPOTIFY_TOKEN;
   let avatar = null;
   let followers = null;
-  const cacheArtist = artistData[capitalizeString(name)];
+  const cacheArtist = artistData[name];
   const artistObj = artists.find((a) => a.artist === name);
 
   if (cacheArtist) {
