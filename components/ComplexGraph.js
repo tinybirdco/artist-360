@@ -3,7 +3,7 @@ import { select, scaleLinear, easeLinear, max, line, area } from "d3";
 import numeral from "numeral";
 import useVisibilityChange from "use-visibility-change";
 
-const ANIMATION_SPEED = 3000;
+const ANIMATION_SPEED = 1000;
 
 export default function ComplexGraph({
   endpoint,
@@ -18,7 +18,9 @@ export default function ComplexGraph({
   strokeWidth = 3,
 }) {
   const [n, setN] = useState(!timeFrame ? 55 : timeFrame);
-  const [data, setData] = useState(new Array(n + 2).fill(0));
+  const [data, setData] = useState(
+    new Array(!timeFrame ? 58 : timeFrame).fill(0)
+  );
   const [visible, setVisible] = useState(true);
   const [mounted, setMounted] = useState(false);
   const d3Container = useRef(null);
@@ -34,13 +36,18 @@ export default function ComplexGraph({
   }
 
   async function _setLastOcc() {
+    // Add new value (don't stop the animation)
+    const newData = data.slice(0);
+    newData.shift();
+    newData.push(0);
+    setData(newData);
+
+    // Update it with a real value
     let d = await _fetchData();
 
     if (d && d.length > 0) {
-      const newData = data.slice(0);
       const lastNewItem = d.pop();
-      newData.shift();
-      newData.push(lastNewItem[key]);
+      newData[newData.length - 1] = lastNewItem[key];
       setData(newData);
     }
   }
@@ -60,7 +67,7 @@ export default function ComplexGraph({
       .catch((e) => ({ error: e.toString() }));
 
     if (!error && data.length > 0) {
-      return data.slice(0, !timeFrame ? 57 : timeFrame);
+      return data.slice(0, !timeFrame ? 58 : timeFrame);
     } else {
       return null;
     }
