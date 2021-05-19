@@ -9,11 +9,7 @@ import capitalizeString from "../utils/capitalize-string";
 
 export default function Search({ className = "", name = "" }) {
   const router = useRouter();
-  const [filteredItems, setFilteredItems] = useState([
-    {
-      artist: "J Balvin",
-    },
-  ]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [filter, setFilter] = useState(capitalizeString(name));
   const [focused, setFocused] = useState(false);
   const [cursor, setCursor] = useState(0);
