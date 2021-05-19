@@ -43,6 +43,10 @@
   background: #F7F7F7;
   border-radius: $unit * 4px;
 }
+.Search-resultsItem:hover,
 .Search-resultsItemSelected {
   font-weight: 800;
+}
+.Search-resultsItem:hover {
+  cursor: pointer;
 }

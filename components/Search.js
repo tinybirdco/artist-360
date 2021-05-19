@@ -98,6 +98,25 @@ export default function Search({ className = "", name = "" }) {
     setCursor(newCursor);
   }
 
+  function _onClickOption(ev, n) {
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    if (filter && filteredItems[n]) {
+      _onSelect(filteredItems[n]);
+    }
+  }
+
+  function _onFocus() {
+    setFocused(true);
+  }
+
+  function _onBlur() {
+    setTimeout(function () {
+      setFocused(false);
+    }, 100);
+  }
+
   useEffect(() => {
     const item = filteredItems[cursor];
     if (item) {
@@ -120,7 +139,12 @@ export default function Search({ className = "", name = "" }) {
   );
 
   return (
-    <form className={`${className} ${styles.Search}`} onSubmit={_onSubmit}>
+    <form
+      onFocus={() => _onFocus()}
+      onBlur={() => _onBlur()}
+      className={`${className} ${styles.Search}`}
+      onSubmit={_onSubmit}
+    >
       <svg
         className={styles["Search-icon"]}
         width="16"
@@ -141,8 +165,6 @@ export default function Search({ className = "", name = "" }) {
         className={`${styles["Search-input"]} as-font--small-light as-color--main`}
         type="text"
         value={filter}
-        onFocus={() => setFocused(true)}
-        onBlur={() => setFocused(false)}
         onChange={_onChangeFilter}
         onKeyDown={_onKeyDown}
       />
@@ -154,6 +176,7 @@ export default function Search({ className = "", name = "" }) {
               return (
                 <li
                   key={`results-item-${i}`}
+                  onClick={(ev) => _onClickOption(ev, i)}
                   id={`results-item-${encodeURIComponent(a.artist)}`}
                   className={`${styles["Search-resultsItem"]} ${
                     isFocused ? styles["Search-resultsItemSelected"] : ""
