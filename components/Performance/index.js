@@ -104,14 +104,14 @@ export default function Performance({ size, endpoint, filters, interval }) {
       <SimpleGraph data={daysStats} />
 
       <div className="mt-10">
-        <h3 className="as-font--huge-bold as-color--main no-spacing-3">
+        <h3 className="as-font--huge-bold as-color--main no-spacing-4">
           <CountUp
             isCounting
             start={0}
             end={revenue}
             duration={1}
             suffix={"€"}
-            formatter={(v) => `${numeral(v).format("0,0.0")}€`}
+            formatter={(v) => `${numeral(v).format("0,0.00")}€`}
           />
         </h3>
         <label className="as-font--small-light">
