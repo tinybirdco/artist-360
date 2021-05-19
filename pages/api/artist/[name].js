@@ -1,14 +1,20 @@
 import fetch from "node-fetch";
 import artists from "../../../public/artists.json";
+import artistData from "../../../public/artist-data.json";
+import capitalizeString from "../../../utils/capitalize-string";
 
 export default async (req, res) => {
   const { name } = req.query;
   const token = process.env.SPOTIFY_TOKEN;
   let avatar = null;
   let followers = null;
+  const cacheArtist = artistData[capitalizeString(name)];
   const artistObj = artists.find((a) => a.artist === name);
 
-  if (artistObj) {
+  if (cacheArtist) {
+    avatar = cacheArtist.images.slice(-1)[0].url;
+    followers = cacheArtist.followers.total;
+  } else if (artistObj) {
     const song = await fetch(
       new URL(`/v1/tracks/${artistObj.song_id}`, "https://api.spotify.com"),
       {

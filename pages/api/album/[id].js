@@ -1,10 +1,17 @@
 import fetch from "node-fetch";
+import songData from "../../../public/song-data.json";
 
 export default async (req, res) => {
   const { id } = req.query;
   const token = process.env.SPOTIFY_TOKEN;
   let image = null;
   let artists = null;
+  const cacheSong = songData[id];
+
+  if (cacheSong) {
+    image = cacheSong.album.images.slice(-1)[0].url;
+    artists = cacheSong.album.artists;
+  }
 
   const song = await fetch(
     new URL(`/v1/tracks/${id}?market=ES`, "https://api.spotify.com"),
