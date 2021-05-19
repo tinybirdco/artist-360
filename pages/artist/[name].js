@@ -8,6 +8,7 @@ import Header from "../../components/Header";
 import ServiceFilter from "../../components/ServiceFilter";
 import Footer from "../../components/Footer";
 import ArtistPageItem from "../../components/SimpleList/Item";
+import capitalizeString from "../../utils/capitalize-string";
 
 const SimpleList = dynamic(() => import("../../components/SimpleList"), {
   ssr: false,
@@ -37,9 +38,7 @@ export default function Artist() {
     query: { name, country, service },
   } = router;
   const token = process.env.NEXT_PUBLIC_TOKEN;
-  const normalizedName = name
-    ? name.replace(/\b\w/g, (l) => l.toUpperCase())
-    : "";
+  const normalizedName = name ? capitalizeString(name) : "";
 
   async function _fetchArtistData() {
     const res = await fetch(`/api/artist/${name}`)

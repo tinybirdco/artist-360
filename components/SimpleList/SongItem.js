@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Info from "./Info";
 import Figure from "./Figure";
 import Graph from "../SimpleGraph";
+import capitalizeString from "../../utils/capitalize-string";
 
 export default function SongItem({
   title,
@@ -74,7 +75,7 @@ export default function SongItem({
     <li className="flex-between-center pv-5">
       <Info
         maxWidth={showGraph ? "50%" : "60%"}
-        title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
+        title={capitalizeString(title)}
         desc={artists ? artists.map((a) => a.name).join(", ") : desc}
         image={image}
       />

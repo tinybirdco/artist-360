@@ -1,3 +1,4 @@
+import capitalizeString from "../../utils/capitalize-string";
 import Info from "./Info";
 
 const FLAGS = {
@@ -14,7 +15,7 @@ export default function CountryItem({ title, desc }) {
     <li className="flex-between-center pv-5">
       <Info
         maxWidth={"100%"}
-        title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
+        title={capitalizeString(title)}
         desc={desc}
         icon={FLAGS[title]}
       />

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import artists from "../public/artists.json";
 
 import styles from "../styles/Search.module.scss";
+import capitalizeString from "../utils/capitalize-string";
 
 export default function Search({ className = "", name = "" }) {
   const router = useRouter();
@@ -13,9 +14,7 @@ export default function Search({ className = "", name = "" }) {
       artist: "J Balvin",
     },
   ]);
-  const [filter, setFilter] = useState(
-    name.replace(/\b\w/g, (l) => l.toUpperCase())
-  );
+  const [filter, setFilter] = useState(capitalizeString(name));
   const [focused, setFocused] = useState(false);
   const [cursor, setCursor] = useState(0);
   let filterOpts = {
@@ -160,7 +159,7 @@ export default function Search({ className = "", name = "" }) {
                     isFocused ? styles["Search-resultsItemSelected"] : ""
                   } pv-5 ph-8 as-font--small as-color--main`}
                 >
-                  {a.artist.replace(/\b\w/g, (l) => l.toUpperCase())}
+                  {capitalizeString(a.artist)}
                 </li>
               );
             })}

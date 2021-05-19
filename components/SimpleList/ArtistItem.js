@@ -5,6 +5,7 @@ import Info from "./Info";
 import Figure from "./Figure";
 import Graph from "../SimpleGraph";
 import numeral from "numeral";
+import capitalizeString from "../../utils/capitalize-string";
 
 export default function ArtistItem({
   title,
@@ -73,7 +74,7 @@ export default function ArtistItem({
         <a style={{ width: "100%", textDecoration: "none", cursor: "pointer" }}>
           <Info
             maxWidth={"100%"}
-            title={title.replace(/\b\w/g, (l) => l.toUpperCase())}
+            title={capitalizeString(title)}
             desc={
               followers ? `${numeral(followers).format(",")} followers` : "-"
             }
