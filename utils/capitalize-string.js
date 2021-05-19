@@ -1,4 +1,4 @@
-export default function (str) {
+export default function capitalizeString(str) {
   if (!str) {
     return "";
   }
