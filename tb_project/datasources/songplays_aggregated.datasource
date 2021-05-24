@@ -1,0 +1,12 @@
+SCHEMA > 
+    `date` Date,
+    `country` LowCardinality(String),
+    `source` LowCardinality(String),
+    `artist` LowCardinality(String),
+    `song_title` LowCardinality(String),
+    `album_name` LowCardinality(String),
+    `plays` SimpleAggregateFunction(sum, UInt64),
+    `income` SimpleAggregateFunction(sum, Float64)
+
+ENGINE AggregatingMergeTree
+ENGINE_SORTING_KEY artist,date,album_name,song_title,country,source

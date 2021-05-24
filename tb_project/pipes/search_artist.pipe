@@ -1,0 +1,47 @@
+DESCRIPTION >
+	Lets you search artists by name. 
+
+Returns all the artists whose name matches the passed `artist` param and `song_id`, the ID of any of the songs from that artist
+
+
+NODE distinct_artists
+SQL >
+
+    SELECT distinct artist FROM songplays_aggregated
+
+
+
+NODE filter_by_artist_name
+SQL >
+
+    %
+
+    WITH {{String(artist, '.', description="Artist name, case insensitive")}} as search_string,
+    -- so that 'c tangana' also matches 'c. tangana' for example
+    replaceRegexpAll(search_string, '\\W', '.+') as search_string_2 
+
+    SELECT * FROM distinct_artists
+    WHERE multiMatchAny(artist, [search_string_2])
+
+
+
+NODE filter_songs_by_artists
+SQL >
+
+    select 
+        *,
+        arrayJoin(splitByChar('/', artists)) artist
+    from songs_reference
+    where artist in (select artist from filter_by_artist_name)
+
+
+
+NODE result
+SQL >
+
+    SELECT artist, any(external_id) as song_id 
+    from filter_songs_by_artists
+    group by artist
+    order by artist
+
+

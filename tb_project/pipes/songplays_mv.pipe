@@ -1,0 +1,15 @@
+NODE materialization
+SQL >
+
+    SELECT 
+        JSONExtractString(value, 'external_id') external_id,
+        coalesce(parseDateTimeBestEffortOrNull(JSONExtractString(value, 'play_time')), toDateTime(0)) play_time,
+        JSONExtractString(value, 'country') country,
+        JSONExtractString(value, 'source') source
+
+    FROM songplays_kafka_landing
+
+TYPE materialized
+DATASOURCE songplays_kafka_destination
+
+

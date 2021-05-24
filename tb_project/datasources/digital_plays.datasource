@@ -1,0 +1,11 @@
+
+SCHEMA >
+    `external_id` String,
+    `play_time` DateTime,
+    `country` String,
+    `source` String
+
+ENGINE "MergeTree"
+ENGINE_PARTITION_KEY "toYear(play_time)"
+ENGINE_SORTING_KEY "play_time, cityHash64(external_id)"
+ENGINE_SAMPLING_KEY "cityHash64(external_id)"

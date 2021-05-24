@@ -1,0 +1,111 @@
+DESCRIPTION >
+	Lets you get, the ranking of songs/artists/albums/sources/countries sorted by plays.
+
+It also lets the evolution of song plays and income over time and filter the results by `song`, `artist`, `country` or `source`.
+
+Example
+* global evolution: call the endpoints without parameters
+* evolution filter by artist: ?artist=bad bunny
+* evolution filter by song: ?song=imagine
+* evolution filter by country and artist: ?country=spain&artist=bad bunny
+* evolution filter by country, source and artist: ?country=spain&artist=bad bunny&source=spotify
+
+
+NODE digital_plays_filtered
+DESCRIPTION >
+    without the limit it times out. We should probably create a MV grouped by artist, song, country, source to count plays
+
+SQL >
+
+    SELECT 
+        *,
+        0.00005430597610141161 * 10 total_income --otherwise the top artist would just make 6k/month
+    FROM digital_plays_kafka_destination
+    -- to sample data somehow (if we do LIMIT, we don't get results over several days)
+    --WHERE toHour(play_time) == 00 AND toMinute(play_time) < 2
+    WHERE play_time > now() - interval 1 minute
+
+
+
+NODE digital_plays_enriched_with_song_data
+SQL >
+
+    SELECT
+      a.*, 
+      b.artists,
+      arrayUniq(splitByChar('/', b.artists)) count_artists,
+      b.song_title,
+      b.album_name
+    FROM digital_plays_filtered a
+    ANY LEFT JOIN songs_reference_join_by_external_id b on a.external_id = b.external_id
+    ORDER BY play_time
+
+
+
+NODE plays_with_artist
+SQL >
+
+    SELECT 
+      external_id,
+      play_time,
+      country,
+      source,
+      song_title,
+      album_name,
+      artists,
+      total_income / count_artists income,
+      arrayJoin(splitByChar('/', artists)) artist -- the artists field contains more than 1 artist many times
+    FROM digital_plays_enriched_with_song_data
+
+
+
+NODE filter_by_artist_country_source
+SQL >
+
+    %
+
+    SELECT * FROM plays_with_artist
+    WHERE 1=1
+
+    {% if defined(song) %}
+    AND multiSearchAnyCaseInsensitive(song_title, [{{String(song, '', description="Song name, case insensitive")}}])
+    {% end %}
+    {% if defined(artist) %}
+    AND multiSearchAnyCaseInsensitive(artist, [{{String(artist, '', description="Artist name, case insensitive")}}])
+    {% end %}
+    {% if defined(country) %}
+    AND multiSearchAnyCaseInsensitive(country, [{{String(country, '', description="Country, case insensitive")}}])
+    {% end %}
+    {% if defined(source) %}
+    AND multiSearchAnyCaseInsensitive(source, [{{String(source, '', description="Source, case insensitive")}}])
+    {% end %}
+
+
+
+NODE result
+SQL >
+
+    %
+    SELECT
+      play_time date,
+      count() plays,
+      sum(income) income
+    FROM filter_by_artist_country_source
+    GROUP BY date
+    ORDER BY date ASC
+
+
+
+NODE evolution_plays_income_6
+SQL >
+
+    SELECT cityHash64(CAST(1, 'LowCardinality(UInt8)'))
+
+
+
+NODE evolution_plays_income_7
+SQL >
+
+    SELECT CAST(cityHash64(CAST(1, 'LowCardinality(UInt8)')), 'UInt8')
+
+

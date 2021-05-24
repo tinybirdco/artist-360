@@ -1,0 +1,71 @@
+NODE digital_plays_filtered
+SQL >
+
+    SELECT 
+        *, 
+        0.00005430597610141161 * 10 AS total_income
+    FROM songplays_kafka_destination 
+    WHERE external_id IN 
+    (
+        SELECT external_id
+        FROM top_songs_id_all_time 
+    )
+
+
+
+NODE digital_plays_enriched_with_song_data
+SQL >
+
+    SELECT 
+        *, 
+        joinGet('songs_reference_join_by_external_id', 'artists', external_id) AS artists, 
+        splitByChar('/', artists) AS artists_array, 
+        length(artists_array) AS count_artists, 
+        joinGet('songs_reference_join_by_external_id', 'song_title', external_id) AS song_title, 
+        joinGet('songs_reference_join_by_external_id', 'album_name', external_id) AS album_name
+    FROM digital_plays_filtered
+
+
+
+NODE plays_with_artist
+SQL >
+
+    SELECT 
+        external_id, 
+        play_time, 
+        country, 
+        source, 
+        song_title, 
+        album_name, 
+        artists, 
+        total_income / count_artists AS income, 
+        arrayJoin(artists_array) AS artist
+    FROM digital_plays_enriched_with_song_data 
+
+
+
+NODE result
+SQL >
+
+    SELECT 
+        toDate(play_time) AS date, 
+        country, 
+        source, 
+        artist, 
+        song_title, 
+        album_name, 
+        toUInt64(count()) AS plays, 
+        sum(income) AS income
+    FROM plays_with_artist 
+    GROUP BY 
+        artist, 
+        date, 
+        album_name, 
+        song_title, 
+        country, 
+        source
+
+TYPE materialized
+DATASOURCE songplays_aggregated
+
+

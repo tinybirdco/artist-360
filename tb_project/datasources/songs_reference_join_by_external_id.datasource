@@ -1,0 +1,15 @@
+
+SCHEMA >
+    `id` Int64,
+    `external_id` String,
+    `song_isrc` Nullable(String),
+    `artists` String,
+    `song_title` String,
+    `song_title_version` Nullable(String),
+    `album_name` Nullable(String),
+    `plays` Int64
+
+ENGINE "Join"
+ENGINE_JOIN_STRICTNESS "ANY"
+ENGINE_JOIN_TYPE "LEFT"
+ENGINE_KEY_COLUMNS "external_id"
