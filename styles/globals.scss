@@ -1,0 +1,58 @@
+@import 'vars';
+@import 'mixins';
+
+@import '~reset.css';
+@import '~normalize.css';
+
+html,
+body {
+  position: relative;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #FFF;
+  font-family: "'Inter', system-ui, sans-serif";
+  font-display: swap;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Let's provide color and typography variables everywhere
+:root {
+  @each $key, $value in $colors {
+    --#{$key}-color: #{$value};
+  }
+}
+
+button {
+  outline: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: none;
+  line-height: normal;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: not-allowed
+  }
+}
+
+a {
+  text-decoration: underline
+}
+
+@import 'utils';
+@import 'typography';
+@import 'colors';
+@import 'avatar';
+@import 'content';
+@import 'card';
+@import 'loader';
+@import 'select';

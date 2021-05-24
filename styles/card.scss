@@ -1,0 +1,7 @@
+@import 'vars';
+
+.Card {
+  background: var(--tuna-color);
+  border-radius: $unit * 4px;
+  padding: $unit * 10px;
+}

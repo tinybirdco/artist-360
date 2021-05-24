@@ -1,0 +1,10 @@
+@import 'vars';
+
+.Loading {
+  background: rgba(#000, 0.03);
+}
+
+.LoadingBar {
+  height: $unit * 8px;
+  border-radius: $unit * 4px;
+}

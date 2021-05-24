@@ -1,0 +1,89 @@
+@import 'vars';
+
+@for $i from 0 through 50 {
+  .p-#{$i} { padding: #{$unit * $i}px; }
+  .pt-#{$i} { padding-top: #{$unit * $i}px; }
+  .pr-#{$i} { padding-right: #{$unit * $i}px; }
+  .pb-#{$i} { padding-bottom: #{$unit * $i}px; }
+  .pl-#{$i} { padding-left: #{$unit * $i}px; }
+  .pv-#{$i} { padding-top: #{$unit * $i}px; padding-bottom: #{$unit * $i}px; }
+  .ph-#{$i} { padding-left: #{$unit * $i}px; padding-right: #{$unit * $i}px; }
+
+  .m-#{$i} { margin: #{$unit * $i}px; }
+  .mt-#{$i} { margin-top: #{$unit * $i}px; }
+  .mr-#{$i} { margin-right: #{$unit * $i}px; }
+  .mb-#{$i} { margin-bottom: #{$unit * $i}px; }
+  .ml-#{$i} { margin-left: #{$unit * $i}px; }
+  .mv-#{$i} { margin-top: #{$unit * $i}px; margin-bottom: #{$unit * $i}px; }
+  .mh-#{$i} { margin-left: #{$unit * $i}px; margin-right: #{$unit * $i}px; }
+}
+
+.overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Really used in several places
+.inline {
+  display: inline-block;
+}
+
+////////////////
+// Flex stuff //
+////////////////
+
+// flex items in the center
+.full-space-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 10;
+  & > * { flex-shrink: 0;}
+}
+
+// Flex items no shrink
+.no-shrink {
+  flex-shrink: 0;
+}
+
+// Flex and center HA!
+.flex {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+// Flex to top
+.flex-top {
+  display: flex;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+
+// Flex to bottom
+.flex-bottom {
+  display: flex;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+// Flex, and justify space-between and center aligned...
+.flex-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+// Flex, and justify space-between and top aligned...
+.flex-between-start {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+// Flex, and justify space-between and bottom aligned...
+.flex-between-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

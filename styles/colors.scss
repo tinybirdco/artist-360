@@ -1,0 +1,20 @@
+@import 'vars';
+
+// All colors available for typography or content style
+@each $key, $value in $colors {
+  .as-color--#{$key} {
+    color: var(--#{$key}-color);
+  }
+  .as-bkg--#{$key} {
+    background-color: var(--#{$key}-color);
+  }
+  .as-fill--#{$key} {
+    fill: var(--#{$key}-color);
+  }
+
+  .as-color--#{$key}.is-disabled,
+  .as-bkg--#{$key}.is-disabled,
+  .as-fill--#{$key}.is-disabled {
+    opacity: 0.5;
+  }
+}

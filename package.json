@@ -8,8 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
+    "d3": "^6.7.0",
+    "fuse.js": "^6.4.6",
     "next": "10.2.0",
+    "node-fetch": "^2.6.1",
+    "normalize-scss": "^7.0.1",
+    "normalize.css": "^8.0.1",
+    "numeral": "^2.0.6",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-select": "^4.3.1",
+    "reset.css": "^2.0.2",
+    "sass": "^1.32.13",
+    "use-count-up": "^2.3.1",
+    "use-visibility-change": "^0.3.0"
   }
 }
