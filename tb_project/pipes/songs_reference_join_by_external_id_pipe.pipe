@@ -1,0 +1,10 @@
+NODE songs_reference_join_by_external_id_view
+SQL >
+
+    SELECT *
+    FROM songs_reference 
+
+TYPE materialized
+DATASOURCE songs_reference_join_by_external_id
+
+

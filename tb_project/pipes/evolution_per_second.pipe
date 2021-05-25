@@ -1,0 +1,106 @@
+DESCRIPTION >
+	Second evolution for the last 2 minutes of song plays and income over time and filter the results by `song`, `artist`, `country`, `source`, `album`, or not filter at all.
+
+Examples:
+* global evolution: call the endpoints without parameters
+* evolution filter by artist: ?artist=bad bunny
+* evolution filter by song: ?song=imagine
+* evolution filter by country and artist: ?country=spain&artist=bad bunny
+* evolution filter by country, source and artist: ?country=spain&artist=bad bunny&source=spotify
+
+
+NODE digital_plays_filtered
+DESCRIPTION >
+    without the limit it times out. We should probably create a MV grouped by artist, song, country, source to count plays
+
+SQL >
+
+    SELECT 
+        *,
+        0.00005430597610141161 * 10 total_income --otherwise the top artist would just make 6k/month
+    FROM songplays_kafka_destination
+    -- to sample data somehow (if we do LIMIT, we don't get results over several days)
+    --WHERE toHour(play_time) == 00 AND toMinute(play_time) < 2
+    WHERE play_time > now() - interval 2 minute
+
+
+
+NODE digital_plays_enriched_with_song_data
+SQL >
+
+    SELECT
+        *, 
+        joinGet('songs_reference_join_by_external_id', 'artists', external_id) AS artists, 
+        splitByChar('/', artists) AS artists_array, 
+        length(artists_array) AS count_artists, 
+        joinGet('songs_reference_join_by_external_id', 'song_title', external_id) AS song_title, 
+        joinGet('songs_reference_join_by_external_id', 'album_name', external_id) AS album_name
+    FROM digital_plays_filtered
+
+
+
+NODE plays_with_artist
+SQL >
+
+    SELECT 
+      external_id,
+      play_time,
+      country,
+      source,
+      song_title,
+      album_name,
+      artists,
+      total_income / count_artists income,
+      arrayJoin(artists_array) artist
+    FROM digital_plays_enriched_with_song_data
+
+
+
+NODE filter_by_artist_country_source
+SQL >
+
+    %
+
+    SELECT * FROM plays_with_artist
+    WHERE 1=1
+
+    {% if defined(song) %}
+    AND multiSearchAnyCaseInsensitive(song_title, [{{String(song, '', description="Song name, case insensitive")}}])
+    {% end %}
+    {% if defined(artist) %}
+    AND multiSearchAnyCaseInsensitive(artist, [{{String(artist, '', description="Artist name, case insensitive")}}])
+    {% end %}
+    {% if defined(country) %}
+    AND multiSearchAnyCaseInsensitive(country, [{{String(country, '', description="Country, case insensitive")}}])
+    {% end %}
+    {% if defined(source) %}
+    AND multiSearchAnyCaseInsensitive(source, [{{String(source, '', description="Source, case insensitive")}}])
+    {% end %}
+    {% if defined(album) %}
+    AND multiSearchAnyCaseInsensitive(album_name, [{{String(album, '', description="Album name, case insensitive")}}])
+    {% end %}
+
+
+
+NODE filled_dates
+SQL >
+
+    WITH now() - interval 2 minute AS start,
+    now() - interval 3 second AS end
+    select arrayJoin(arrayMap(x -> toDateTime(x), range(toUInt32(start), toUInt32(end), 1))) AS date
+
+
+
+NODE result
+SQL >
+
+    SELECT
+      play_time date,
+      if(income == 0, 0, count()) plays,
+      sum(income) * 7.3 income
+    FROM filter_by_artist_country_source
+    full outer join filled_dates using date
+    GROUP BY date
+    ORDER BY date ASC
+
+

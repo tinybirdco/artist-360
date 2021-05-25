@@ -33,3 +33,10 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+
+# tinybird
+.tinyb
+
+# s3 files
+songplays_s3*.txt

@@ -1,0 +1,13 @@
+NODE result
+SQL >
+
+    %
+    select
+        {{columns(by, 'artist')}},
+        sum(plays) plays
+    from songplays_aggregated
+    group by {{columns(by, 'artist')}}
+    order by plays desc
+    limit {{Int32(limit, 10)}}
+
+

@@ -1,0 +1,104 @@
+DESCRIPTION >
+	Returns the ranking of songs/artists/albums/sources/countries sorted by plays.
+
+For each row, returns `plays`, `income` and `song_id` (the ID of any song for that group)
+
+It also lets you filter by `artist`, `country`, `source`, `song` or `album`.
+
+Examples of global rankings:
+
+* top songs global: ?by=song_title, also no params at all
+* top albums global: ?by=album_name
+* top countries global: ?by=country
+* top sources global: ?by=source
+
+Examples, filtering the results by artist/country/source:
+* top songs, filter by artist: ?by=song_title&artist=green day, also just ?artist=green day
+* top albums, filter by artist: ?by=album_name&artist=green day
+* top countries, filter by artist: ?by=country&artist=green day
+* top sources, filter by artist: ?by=source&artist=green day
+* top songs, filter by country: ?country=spain
+* tops songs, filter by country and source: ?country=spain&source=spotify
+* tops songs, filter by country, source and artist: ?country=spain&source=spotify&artist=green day
+* tops albums, filter by country, source and artist: ?by=album_name&country=spain&source=spotify&artist=green day
+
+
+NODE artist_album_any_song
+DESCRIPTION >
+    Gets the `song_id` or any song of an artist and album. Used to get cover images from the Spotify API
+SQL >
+
+    select 
+        arrayJoin(splitByChar('/', artists)) artist,
+        album_name,
+        any(external_id) song_id
+    from songs_reference
+    where artist in (select artist from songplays_aggregated)
+    group by artist, album_name
+    order by artist, album_name
+
+
+NODE plays_with_artist
+SQL >
+
+    SELECT 
+        dp.*,
+        aa.song_id 
+    FROM songplays_aggregated dp
+    LEFT JOIN artist_album_any_song aa
+    ON dp.artist = aa.artist AND dp.album_name = aa.album_name
+
+
+
+NODE filter_by_artist_country_source
+SQL >
+
+    %
+
+    SELECT * FROM plays_with_artist
+    WHERE 1=1
+    {% if defined(song) %}
+    AND multiSearchAnyCaseInsensitive(song_title, [{{String(song, '', description="Song name, case insensitive")}}])
+    {% end %}
+    {% if defined(artist) %}
+    AND multiSearchAnyCaseInsensitive(artist, [{{String(artist, '', description="Artist name, case insensitive")}}])
+    {% end %}
+    {% if defined(country) %}
+    AND multiSearchAnyCaseInsensitive(country, [{{String(country, '', description="Country, case insensitive")}}])
+    {% end %}
+    {% if defined(source) %}
+    AND multiSearchAnyCaseInsensitive(source, [{{String(source, '', description="Source, case insensitive")}}])
+    {% end %}
+    {% if defined(album) %}
+    AND multiSearchAnyCaseInsensitive(album_name, [{{String(album, '', description="Album name, case insensitive")}}])
+    {% end %}
+
+
+
+NODE result
+SQL >
+
+    %
+    SELECT
+      {{columns(by, 'artist')}},
+      sum(plays) plays,
+      sum(income) income,
+      any(song_id) song_id
+    FROM filter_by_artist_country_source
+    GROUP BY {{columns(by, 'artist')}}
+    ORDER BY plays DESC
+
+
+
+NODE add_documentation
+SQL >
+
+    %
+    WITH ({{Array(by, 'String', 'artist', 
+        description="Field to get the ranking of, comma-separated. One or several of 'song_title', 'artist', 'country', 'album_name', 'source'", 
+        required=True,
+        enum=['song_title', 'artist', 'country', 'album_name', 'source'])}}) AS identifier
+    SELECT * FROM result
+    LIMIT {{Int32(limit, 20, description="Number of results to return", required=True)}}
+
+
