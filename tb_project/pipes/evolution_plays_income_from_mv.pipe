@@ -1,0 +1,72 @@
+DESCRIPTION >
+	Daily evolution of song plays and income over time and filter the results by `song`, `artist`, `country`, `source`, `album`, or not filter at all.
+
+All the calls can have a filter to set the amount of days you want to receive, like `days=7` 
+
+Example
+* global evolution: call the endpoints without parameters
+* evolution filter by artist: ?artist=bad bunny
+* evolution filter by song: ?song=imagine
+* evolution filter by country and artist: ?country=spain&artist=bad bunny
+* evolution filter by country, source and artist: ?country=spain&artist=bad bunny&source=spotify
+
+
+NODE plays_with_artist
+SQL >
+
+    %SELECT 
+        *
+    FROM songplays_aggregated
+    {% if defined(days) %}
+    where date > today() - interval {{Int32(days)}} day
+    {% end %}
+
+
+
+NODE filter_by_artist_country_source
+SQL >
+
+    %
+
+    SELECT * FROM plays_with_artist
+    WHERE 1=1
+
+    {% if defined(song) %}
+    AND multiSearchAnyCaseInsensitive(song_title, [{{String(song, '', description="Song name, case insensitive")}}])
+    {% end %}
+    {% if defined(artist) %}
+    AND multiSearchAnyCaseInsensitive(artist, [{{String(artist, '', description="Artist name, case insensitive")}}])
+    {% end %}
+    {% if defined(country) %}
+    AND multiSearchAnyCaseInsensitive(country, [{{String(country, '', description="Country, case insensitive")}}])
+    {% end %}
+    {% if defined(source) %}
+    AND multiSearchAnyCaseInsensitive(source, [{{String(source, '', description="Source, case insensitive")}}])
+    {% end %}
+    {% if defined(album) %}
+    AND multiSearchAnyCaseInsensitive(album_name, [{{String(album, '', description="Album name, case insensitive")}}])
+    {% end %}
+
+
+
+NODE result
+SQL >
+
+    %
+    SELECT
+      date,
+      count() plays,
+      sum(income) * 7.3 income
+    FROM filter_by_artist_country_source
+    GROUP BY date
+    ORDER BY date ASC
+
+
+
+NODE evolution_plays_income_from_mv_3
+SQL >
+
+    SELECT * FROM result
+    ORDER BY date DESC
+
+

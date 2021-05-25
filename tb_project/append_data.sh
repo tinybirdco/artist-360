@@ -1,4 +1,4 @@
-input="songplays_s3_links_somedays.txt"
+input="songplays_s3_links_some_days.txt"
 while IFS= read -r line
 do
     SECONDS_WAIT=60
@@ -6,7 +6,7 @@ do
         -H "Authorization: Bearer $TOKEN" \
         -X POST "https://api.tinybird.co/v0/datasources" \
         -d mode='append' \
-        -d name='digital_plays_kafka_destination' \
+        -d name='songplays_kafka_destination' \
         --data-urlencode "url=$line"
     echo "\nAppending $line"
     echo "Waiting $SECONDS_WAIT seconds"

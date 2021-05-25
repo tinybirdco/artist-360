@@ -1,7 +1,9 @@
 DESCRIPTION >
-	Lets you get, the ranking of songs/artists/albums/sources/countries sorted by plays.
+	Returns the ranking of songs/artists/albums/sources/countries sorted by plays.
 
-It also lets you filter by `artist`, `country` or `source`.
+For each row, returns `plays`, `income` and `song_id` (the ID of any song for that group)
+
+It also lets you filter by `artist`, `country`, `source`, `song` or `album`.
 
 Examples of global rankings:
 
@@ -21,37 +23,30 @@ Examples, filtering the results by artist/country/source:
 * tops albums, filter by country, source and artist: ?by=album_name&country=spain&source=spotify&artist=green day
 
 
-NODE digital_plays_filtered
+NODE artist_album_any_song
+DESCRIPTION >
+    Gets the `song_id` or any song of an artist and album. Used to get cover images from the Spotify API
 SQL >
 
-    SELECT 
-        *,
-        0.00005430597610141161 * 10 total_income --otherwise the top artist would just make 6k/month
-    FROM digital_plays_kafka_destination
-    WHERE toDate(play_time) = toDate('2021-03-20')
-    LIMIT 17000000
-
-
-
-NODE digital_plays_enriched_with_song_data
-SQL >
-
-    SELECT
-      a.*, 
-      b.artists,
-      arrayUniq(splitByChar('/', b.artists)) count_artists,
-      b.song_title,
-      b.album_name
-    FROM digital_plays_filtered a
-    ANY LEFT JOIN songs_reference_join_by_external_id b on a.external_id = b.external_id
-    ORDER BY play_time
-
+    select 
+        arrayJoin(splitByChar('/', artists)) artist,
+        album_name,
+        any(external_id) song_id
+    from songs_reference
+    where artist in (select artist from songplays_aggregated)
+    group by artist, album_name
+    order by artist, album_name
 
 
 NODE plays_with_artist
 SQL >
 
-    SELECT * FROM digital_plays_aggregated
+    SELECT 
+        dp.*,
+        aa.song_id 
+    FROM songplays_aggregated dp
+    LEFT JOIN artist_album_any_song aa
+    ON dp.artist = aa.artist AND dp.album_name = aa.album_name
 
 
 
@@ -86,8 +81,9 @@ SQL >
     %
     SELECT
       {{columns(by, 'artist')}},
-      count() plays,
-      sum(income) income
+      sum(plays) plays,
+      sum(income) income,
+      any(song_id) song_id
     FROM filter_by_artist_country_source
     GROUP BY {{columns(by, 'artist')}}
     ORDER BY plays DESC
@@ -103,6 +99,6 @@ SQL >
         required=True,
         enum=['song_title', 'artist', 'country', 'album_name', 'source'])}}) AS identifier
     SELECT * FROM result
-    LIMIT 20
+    LIMIT {{Int32(limit, 20, description="Number of results to return", required=True)}}
 
 

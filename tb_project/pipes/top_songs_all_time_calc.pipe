@@ -1,0 +1,100 @@
+DESCRIPTION >
+    Gets all song ids of the artists who have any songs in the top 200 of any country
+    You should export the result of the `top_songs_all_time` node and append it to the `top_songs_id_all_time` Data Source.
+    This makes the `songplays_aggregated_mv` be faster while keeping all the info on the most popular songs and artists (as the distribution has a very long tail with songs barely played)
+
+
+
+NODE digital_plays_filtered
+SQL >
+
+    SELECT 
+        *, 
+        0.00005430597610141161 * 10 AS total_income
+    FROM songplays_kafka_destination 
+    --where play_time > now() - interval 1 day
+    order by play_time desc
+    LIMIT 10000000
+
+
+
+NODE top_artists_all_time_1
+SQL >
+
+    SELECT 
+        country, 
+        source,
+        arrayJoin(topK(100)(external_id)) AS top_externals_id
+    FROM digital_plays_filtered
+    GROUP BY 
+        country, source
+
+
+
+NODE top_songs_per_country
+DESCRIPTION >
+    selects top 200 songs per country
+
+SQL >
+
+    select DISTINCT top_externals_id as external_id from (
+      SELECT 
+        country, 
+        arrayJoin(topK(200)(external_id)) AS top_externals_id
+    FROM digital_plays_filtered
+    GROUP BY 
+        country
+      )
+
+
+
+NODE top_artists_from_top_songs
+DESCRIPTION >
+    gets the artists from the top 200 songs of each country
+
+SQL >
+
+    select 
+      joinGet('songs_reference_join_by_external_id', 'artists', external_id) as artists,
+      arrayJoin(splitByChar('/', artists)) artist
+    FROM top_songs_per_country
+
+
+
+NODE top_songs_all_time
+DESCRIPTION >
+    gets all the songs from any artists that have at least 1 song in the top 200 of any country
+
+SQL >
+
+    select external_id from songs_reference
+    where arrayJoin(splitByChar('/', artists)) in (
+    SELECT artist FROM top_artists_from_top_songs
+    )
+
+
+NODE top_artists_all_time_4
+SQL >
+
+    SELECT
+        external_id song_id,
+        count() plays
+    FROM digital_plays_filtered
+    GROUP BY song_id
+    ORDER BY plays DESC
+
+
+
+NODE top_artists_all_time_5
+SQL >
+
+    SELECT count() from top_artists_from_top_songs
+
+
+
+NODE top_songs_all_time_calc_7
+SQL >
+
+    SELECT count() from top_songs_all_time
+
+
