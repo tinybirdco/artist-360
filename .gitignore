@@ -37,3 +37,6 @@ yarn-error.log*
 
 # tinybird
 .tinyb
+
+# s3 files
+songplays_s3*.txt
