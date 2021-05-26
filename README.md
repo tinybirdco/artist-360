@@ -6,7 +6,7 @@ Demo to show how to analyze the performance of millions of artists in real-time,
 Create a `.env` file with the following properties:
 
 ```
-NEXT_PUBLIC_TOKEN=p.eyJ1IjogIjI5ZGRlNDhjLTU3NDQtNDQ1Yy1iZTJhLThkMjdiNWM5NTVmNiIsICJpZCI6ICJkYzcyOGM5NS0wYTdjLTQzZDYtOTllNy0zODdmZDNkMzQzYjkifQ.d9zBoLq3KosGGsCEZ5NRUnNd8-27rYwJba765FZxtQg
+NEXT_PUBLIC_TOKEN=YOUR_TINYBIRD_TOKEN
 SPOTIFY_TOKEN=YOUR_SPOTIFY_TOKEN
 ```
 
