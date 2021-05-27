@@ -31,4 +31,4 @@ All API endpoints used in this demo are available in this [page](https://api.tin
 - [x] Deep linking
 - [x] Home artists graph
 - [ ] Responsive
-- [ ] Graph issues
+- [x] Graph issues
